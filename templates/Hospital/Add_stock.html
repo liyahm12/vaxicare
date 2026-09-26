@@ -1,0 +1,211 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Login Page</title>#}
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
+{#   #}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{#    <div class="container">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-md-6">#}
+{#                <h2 class="text-center"> Update stock</h2>#}
+{#                <form action="/myapp/h_add_stock_post/" method="post">#}
+{#                    {% csrf_token %}#}
+{##}
+{#                    <div class="form-group">#}
+{#                        <input type="hidden" name="id" value="{{ id }}">#}
+{#                        <label for="stock">Stock</label>#}
+{#                        <input type="number" class="form-control" id="password" name="stock" placeholder="stock" required>#}
+{#                    </div>#}
+{##}
+{#                    <button type="submit" class="btn btn-primary btn-block">Submit</button>#}
+{#                </form>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>#}
+{#    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>#}
+{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>#}
+{#</body>#}
+{#{% endblock %}#}
+{#</html>#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Login Page</title>#}
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
+{#   #}
+{#</head>#}
+{#<body>#}
+{% extends 'Hospital/Hospitalindex.html' %}
+{% block body %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5FBFD; --primary:#2C97D6; --primary-deep:#1B6FA8; --teal:#22C6A8;
+    --navy:#10263A; --navy-soft:#5A7284; --mist:#EAF6FB; --border:#DBEEF6; --white:#FFFFFF;
+    --shadow-md:0 12px 32px rgba(28,111,168,.14); --shadow-lg:0 24px 60px rgba(28,111,168,.18);
+  }
+  .vc-stage{max-width:1180px;margin:0 auto;padding:56px 32px 90px;font-family:'Inter',sans-serif;color:var(--navy);}
+  .vc-breadcrumb{font-size:13px;color:var(--navy-soft);margin-bottom:18px;}
+  .vc-breadcrumb b{color:var(--navy);font-weight:600;}
+  .vc-split{display:grid;grid-template-columns:1fr 1fr;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--white);}
+  .vc-illustration{position:relative;padding:56px 44px;color:#fff;min-height:560px;
+    background:linear-gradient(160deg,#2C97D6 0%,#1B6FA8 55%,#17A88F 130%);
+    display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
+  .vc-illustration::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(420px 300px at 15% 15%,rgba(255,255,255,.14),transparent 60%),
+               radial-gradient(360px 280px at 90% 85%,rgba(255,255,255,.10),transparent 60%);}
+  .vc-eyebrow{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
+    letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:7px 14px;border-radius:999px;}
+  .vc-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#8CF4D9;box-shadow:0 0 0 3px rgba(140,244,217,.3);}
+  .vc-ill-title{position:relative;z-index:2;font-family:'Sora',sans-serif;font-weight:700;font-size:28px;line-height:1.25;
+    margin:20px 0 10px;max-width:340px;}
+  .vc-ill-sub{position:relative;z-index:2;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.82);max-width:320px;}
+  .vc-vial-wrap{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:center;gap:26px;margin:18px 0 6px;}
+  .vc-vial-readout{text-align:center;}
+  .vc-vial-readout .num{font-family:'Sora',sans-serif;font-size:36px;font-weight:700;line-height:1;}
+  .vc-vial-readout .lbl{font-size:12px;color:rgba(255,255,255,.75);margin-top:6px;letter-spacing:.03em;text-transform:uppercase;}
+  .vc-badges{position:relative;z-index:2;display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;}
+  .vc-badge{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);
+    padding:10px 14px;border-radius:14px;font-size:12.5px;font-weight:500;}
+  .vc-badge svg{width:16px;height:16px;flex-shrink:0;}
+  .vc-form-panel{padding:56px 52px;display:flex;flex-direction:column;justify-content:center;}
+  .vc-form-eyebrow{font-size:12.5px;font-weight:600;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;}
+  .vc-form-title{font-family:'Sora',sans-serif;font-weight:700;font-size:28px;margin:10px 0 8px;}
+  .vc-form-desc{font-size:14.5px;color:var(--navy-soft);line-height:1.6;margin-bottom:30px;max-width:400px;}
+  .vc-batch-chip{display:inline-flex;align-items:center;gap:8px;background:var(--mist);border:1px solid var(--border);
+    padding:9px 14px;border-radius:12px;font-size:13px;color:var(--navy-soft);margin-bottom:26px;width:fit-content;}
+  .vc-batch-chip b{color:var(--navy);font-weight:600;}
+  .vc-field{margin-bottom:24px;}
+  .vc-field label{display:block;font-size:13px;font-weight:600;margin-bottom:9px;}
+  .vc-field label .req{color:var(--teal);}
+  .vc-input-shell{position:relative;}
+  .vc-input-shell svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:19px;height:19px;color:var(--navy-soft);}
+  .vc-input-shell input[type="number"]{width:100%;padding:15px 16px 15px 46px;font-family:'Inter',sans-serif;font-size:15.5px;
+    font-weight:500;color:var(--navy);background:#fff;border:1.5px solid var(--border);border-radius:14px;outline:none;
+    transition:border-color .25s ease, box-shadow .25s ease;}
+  .vc-input-shell input[type="number"]:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(44,151,214,.14);}
+  .vc-hint{font-size:12.5px;color:var(--navy-soft);margin-top:8px;}
+  .vc-submit-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 20px;
+    font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--primary-deep));border:none;border-radius:14px;cursor:pointer;
+    box-shadow:0 10px 24px rgba(27,111,168,.28);transition:transform .2s ease, box-shadow .2s ease;}
+  .vc-submit-btn:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(27,111,168,.34);}
+  .vc-foot-note{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:12.5px;color:var(--navy-soft);}
+  .vc-foot-note svg{width:14px;height:14px;color:var(--teal);}
+  @media (max-width:880px){.vc-split{grid-template-columns:1fr;} .vc-illustration{min-height:auto;padding:40px 28px;} .vc-form-panel{padding:40px 28px;}}
+</style>
+
+<div class="vc-stage">
+  <div class="vc-breadcrumb">Inventory &nbsp;/&nbsp; <b>Update Stock</b></div>
+
+  <div class="vc-split">
+    <div class="vc-illustration">
+      <div>
+        <span class="vc-eyebrow"><span class="dot"></span> Cold-chain monitored</span>
+        <div class="vc-ill-title">Every vial, tracked from fridge to syringe.</div>
+        <div class="vc-ill-sub">Update batch quantities in real time and keep every clinic in sync.</div>
+      </div>
+
+      <div class="vc-vial-wrap">
+        <svg id="vcVialSvg" width="80" height="184" viewBox="0 0 86 200" fill="none">
+          <defs>
+            <clipPath id="vcVialClip">
+              <path d="M31 30 H55 V52 C68 60 74 78 74 100 V168 C74 182 63 192 43 192 C23 192 12 182 12 168 V100 C12 78 18 60 31 52 Z"/>
+            </clipPath>
+            <linearGradient id="vcLiquidGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8CF4D9"/>
+              <stop offset="1" stop-color="#22C6A8"/>
+            </linearGradient>
+          </defs>
+          <rect id="vcLiquidRect" x="12" y="192" width="62" height="0" fill="url(#vcLiquidGrad)" clip-path="url(#vcVialClip)"/>
+          <path d="M31 30 H55 V52 C68 60 74 78 74 100 V168 C74 182 63 192 43 192 C23 192 12 182 12 168 V100 C12 78 18 60 31 52 Z"
+                stroke="rgba(255,255,255,0.85)" stroke-width="2.5" fill="none"/>
+          <rect x="27" y="14" width="32" height="16" rx="4" fill="rgba(255,255,255,0.9)"/>
+          <rect x="31" y="8" width="24" height="8" rx="3" fill="rgba(255,255,255,0.7)"/>
+        </svg>
+        <div class="vc-vial-readout">
+          <div class="num" id="vcVialNum">0</div>
+          <div class="lbl">Doses in batch</div>
+        </div>
+      </div>
+
+      <div class="vc-badges">
+        <div class="vc-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
+          2–8°C maintained
+        </div>
+        <div class="vc-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          Batch verified
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-form-panel">
+      <span class="vc-form-eyebrow">Inventory · Vaccine batch</span>
+      <h2 class="vc-form-title">Update stock</h2>
+      <p class="vc-form-desc">Enter the current number of doses available for this batch. This updates instantly across all connected clinics.</p>
+
+      <div class="vc-batch-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Batch ID &nbsp;<b>#{{ id }}</b>
+      </div>
+
+      <form action="/myapp/h_add_stock_post/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ id }}">
+
+        <div class="vc-field">
+          <label>Stock quantity <span class="req">*</span></label>
+          <div class="vc-input-shell">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 3l-5 5M14 8l-9 9-2 3 3-2 9-9M14 8L11 5"/></svg>
+            <input type="number" id="vcStockInput" name="stock" placeholder="e.g. 250" min="0" required oninput="vcUpdateVial(this.value)">
+          </div>
+          <div class="vc-hint">Enter the total number of doses currently on hand.</div>
+        </div>
+
+        <button type="submit" class="vc-submit-btn">
+          Update stock
+        </button>
+
+        <div class="vc-foot-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Changes are encrypted and logged for audit
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var MAX = 500, total = 162;
+    var rect = document.getElementById('vcLiquidRect');
+    var num = document.getElementById('vcVialNum');
+    window.vcUpdateVial = function(val){
+      var v = parseFloat(val) || 0;
+      var pct = Math.max(0, Math.min(1, v / MAX));
+      var h = total * pct;
+      rect.setAttribute('height', h);
+      rect.setAttribute('y', 192 - h);
+      num.textContent = Math.round(v);
+    };
+  })();
+</script>
+
+{#</body>#}
+{% endblock %}
+{#</html>#}

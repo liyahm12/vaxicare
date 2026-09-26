@@ -1,0 +1,2050 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Form</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{# #}
+{#</head>#}
+{#<body>#}
+{##}
+{#  <div class="container">#}
+{#    <h2 class="mb-4">Registration Form</h2>#}
+{#    <form action="/myapp/user_signup_post/" method="post" enctype="multipart/form-data">#}
+{##}
+{#        {% csrf_token %}#}
+{#      <div class="row mb-3">#}
+{#        <label for="name" class="col-sm-4 ">Full Name</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" name="name" id="name" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label class="col-sm-4 ">Gender</label>#}
+{#        <div class="col-sm-8">#}
+{#          <div class="form-check form-check-inline">#}
+{#            <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>#}
+{#            <label class="form-check-label" for="male">Male</label>#}
+{#          </div>#}
+{#          <div class="form-check form-check-inline">#}
+{#            <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>#}
+{#            <label class="form-check-label" for="female">Female</label>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="dob" class="col-sm-4 ">Date of Birth</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="date" class="form-control" name="dob" id="dob" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="email" class="col-sm-4 " >Email address</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="email" class="form-control"  id="email" name="email" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="phone" class="col-sm-4 " >Phone Number</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="tel" pattern="[0-9]{10}" class="form-control" id="phone"  name="Phone_number" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="place" class="col-sm-4 " >Place</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" id="place" name="place" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="city" class="col-sm-4 ">City</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" id="city"  name="city" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="state" class="col-sm-4 " >State</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" id="state" name="state" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="pincode" class="col-sm-4 " >Pincode</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" pattern="[0-9]{6}" class="form-control" id="pincode" name="pincode" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="photo" class="col-sm-4 " >Upload Photo</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="file" class="form-control" name="upload_photo" id="photo" accept="image/*" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="password" class="col-sm-4 " >Password</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="password" class="form-control" id="password" name="password" minlength="6" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="confirmPassword" class="col-sm-4 " >Confirm Password</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <div class="offset-sm-4 col-sm-8">#}
+{#          <button type="submit" class="btn btn-primary">Register</button>#}
+{#        </div>#}
+{#      </div>#}
+{#    </form>#}
+{#  </div>#}
+{#  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{##}
+{#</body>#}
+{#</html>#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Registration Form</title>#}
+{##}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"#}
+{#          rel="stylesheet">#}
+{##}
+{#    <style>#}
+{#        .error {#}
+{#            color: red;#}
+{#            font-size: 14px;#}
+{#            margin-top: 5px;#}
+{#        }#}
+{#    </style>#}
+{##}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<div class="container">#}
+{##}
+{#    <h2 class="mb-4">Registration Form</h2>#}
+{##}
+{#    <form action="/myapp/user_signup_post/"#}
+{#          method="post"#}
+{#          enctype="multipart/form-data"#}
+{#          onsubmit="return validateForm()">#}
+{##}
+{#        {% csrf_token %}#}
+{##}
+{#        <!-- Full Name -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="name" class="col-sm-4">Full Name</label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{#                <input type="text"#}
+{#                       class="form-control"#}
+{#                       name="name"#}
+{#                       id="name"#}
+{#                       required>#}
+{##}
+{#                <div id="nameError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Gender -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label class="col-sm-4">Gender</label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <div class="form-check form-check-inline">#}
+{##}
+{#                    <input class="form-check-input"#}
+{#                           type="radio"#}
+{#                           name="gender"#}
+{#                           id="male"#}
+{#                           value="Male">#}
+{##}
+{#                    <label class="form-check-label" for="male">#}
+{#                        Male#}
+{#                    </label>#}
+{##}
+{#                </div>#}
+{##}
+{##}
+{#                <div class="form-check form-check-inline">#}
+{##}
+{#                    <input class="form-check-input"#}
+{#                           type="radio"#}
+{#                           name="gender"#}
+{#                           id="female"#}
+{#                           value="Female">#}
+{##}
+{#                    <label class="form-check-label" for="female">#}
+{#                        Female#}
+{#                    </label>#}
+{##}
+{#                </div>#}
+{##}
+{#                <div id="genderError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Date of Birth -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="dob" class="col-sm-4">#}
+{#                Date of Birth#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="date"#}
+{#                       class="form-control"#}
+{#                       name="dob"#}
+{#                       id="dob"#}
+{#                       required>#}
+{##}
+{#                <div id="dobError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Email -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="email" class="col-sm-4">#}
+{#                Email Address#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="email"#}
+{#                       class="form-control"#}
+{#                       id="email"#}
+{#                       name="email"#}
+{#                       required>#}
+{##}
+{#                <div id="emailError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Phone Number -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="phone" class="col-sm-4">#}
+{#                Phone Number#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="tel"#}
+{#                       class="form-control"#}
+{#                       id="phone"#}
+{#                       name="Phone_number"#}
+{#                       maxlength="10"#}
+{#                       required>#}
+{##}
+{#                <div id="phoneError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Place -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="place" class="col-sm-4">#}
+{#                Place#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="text"#}
+{#                       class="form-control"#}
+{#                       id="place"#}
+{#                       name="place"#}
+{#                       required>#}
+{##}
+{#                <div id="placeError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- City -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="city" class="col-sm-4">#}
+{#                City#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="text"#}
+{#                       class="form-control"#}
+{#                       id="city"#}
+{#                       name="city"#}
+{#                       required>#}
+{##}
+{#                <div id="cityError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- State -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="state" class="col-sm-4">#}
+{#                State#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="text"#}
+{#                       class="form-control"#}
+{#                       id="state"#}
+{#                       name="state"#}
+{#                       required>#}
+{##}
+{#                <div id="stateError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Pincode -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="pincode" class="col-sm-4">#}
+{#                Pincode#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="text"#}
+{#                       class="form-control"#}
+{#                       id="pincode"#}
+{#                       name="pincode"#}
+{#                       maxlength="6"#}
+{#                       required>#}
+{##}
+{#                <div id="pincodeError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Photo -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="photo" class="col-sm-4">#}
+{#                Upload Photo#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="file"#}
+{#                       class="form-control"#}
+{#                       name="upload_photo"#}
+{#                       id="photo"#}
+{#                       accept="image/*"#}
+{#                       required>#}
+{##}
+{#                <div id="photoError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Password -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="password" class="col-sm-4">#}
+{#                Password#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="password"#}
+{#                       class="form-control"#}
+{#                       id="password"#}
+{#                       name="password"#}
+{#                       required>#}
+{##}
+{#                <div id="passwordError" class="error"></div>#}
+{##}
+{#                <small class="text-muted">#}
+{#                    Minimum 8 characters, including uppercase,#}
+{#                    lowercase, number and special character.#}
+{#                </small>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Confirm Password -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <label for="confirmPassword" class="col-sm-4">#}
+{#                Confirm Password#}
+{#            </label>#}
+{##}
+{#            <div class="col-sm-8">#}
+{##}
+{#                <input type="password"#}
+{#                       class="form-control"#}
+{#                       id="confirmPassword"#}
+{#                       name="confirm_password"#}
+{#                       required>#}
+{##}
+{#                <div id="confirmPasswordError" class="error"></div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#        <!-- Register Button -->#}
+{#        <div class="row mb-3">#}
+{##}
+{#            <div class="offset-sm-4 col-sm-8">#}
+{##}
+{#                <button type="submit"#}
+{#                        class="btn btn-primary">#}
+{#                    Register#}
+{#                </button>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </form>#}
+{##}
+{#</div>#}
+{##}
+{##}
+{#<script>#}
+{##}
+{#function validateForm() {#}
+{##}
+{#    let valid = true;#}
+{##}
+{#    // Clear previous errors#}
+{#    document.querySelectorAll(".error").forEach(function(error) {#}
+{#        error.innerHTML = "";#}
+{#    });#}
+{##}
+{##}
+{#    // =========================#}
+{#    // FULL NAME#}
+{#    // =========================#}
+{##}
+{#    let name = document.getElementById("name").value.trim();#}
+{##}
+{#    let namePattern = /^[A-Za-z ]+$/;#}
+{##}
+{#    if (name === "") {#}
+{##}
+{#        document.getElementById("nameError").innerHTML =#}
+{#            "Full name cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (!namePattern.test(name)) {#}
+{##}
+{#        document.getElementById("nameError").innerHTML =#}
+{#            "Name should contain only letters.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // GENDER#}
+{#    // =========================#}
+{##}
+{#    let gender = document.querySelector(#}
+{#        'input[name="gender"]:checked'#}
+{#    );#}
+{##}
+{#    if (!gender) {#}
+{##}
+{#        document.getElementById("genderError").innerHTML =#}
+{#            "Please select your gender.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // DATE OF BIRTH#}
+{#    // =========================#}
+{##}
+{#    let dob = document.getElementById("dob").value;#}
+{##}
+{#    if (dob === "") {#}
+{##}
+{#        document.getElementById("dobError").innerHTML =#}
+{#            "Date of birth cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else {#}
+{##}
+{#        let selectedDate = new Date(dob);#}
+{#        let today = new Date();#}
+{##}
+{#        if (selectedDate > today) {#}
+{##}
+{#            document.getElementById("dobError").innerHTML =#}
+{#                "Date of birth cannot be in the future.";#}
+{##}
+{#            valid = false;#}
+{#        }#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // EMAIL#}
+{#    // =========================#}
+{##}
+{#    let email = document.getElementById("email").value.trim();#}
+{##}
+{#    let emailPattern =#}
+{#        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;#}
+{##}
+{#    if (email === "") {#}
+{##}
+{#        document.getElementById("emailError").innerHTML =#}
+{#            "Email cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (!emailPattern.test(email)) {#}
+{##}
+{#        document.getElementById("emailError").innerHTML =#}
+{#            "Please enter a valid email address.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // PHONE NUMBER#}
+{#    // =========================#}
+{##}
+{#    let phone = document.getElementById("phone").value.trim();#}
+{##}
+{#    let phonePattern = /^[0-9]{10}$/;#}
+{##}
+{#    if (phone === "") {#}
+{##}
+{#        document.getElementById("phoneError").innerHTML =#}
+{#            "Phone number cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (!phonePattern.test(phone)) {#}
+{##}
+{#        document.getElementById("phoneError").innerHTML =#}
+{#            "Phone number must contain exactly 10 digits.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // PLACE#}
+{#    // =========================#}
+{##}
+{#    let place = document.getElementById("place").value.trim();#}
+{##}
+{#    if (place === "") {#}
+{##}
+{#        document.getElementById("placeError").innerHTML =#}
+{#            "Place cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // CITY#}
+{#    // =========================#}
+{##}
+{#    let city = document.getElementById("city").value.trim();#}
+{##}
+{#    if (city === "") {#}
+{##}
+{#        document.getElementById("cityError").innerHTML =#}
+{#            "City cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // STATE#}
+{#    // =========================#}
+{##}
+{#    let state = document.getElementById("state").value.trim();#}
+{##}
+{#    if (state === "") {#}
+{##}
+{#        document.getElementById("stateError").innerHTML =#}
+{#            "State cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // PINCODE#}
+{#    // =========================#}
+{##}
+{#    let pincode =#}
+{#        document.getElementById("pincode").value.trim();#}
+{##}
+{#    let pincodePattern = /^[0-9]{6}$/;#}
+{##}
+{#    if (pincode === "") {#}
+{##}
+{#        document.getElementById("pincodeError").innerHTML =#}
+{#            "Pincode cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (!pincodePattern.test(pincode)) {#}
+{##}
+{#        document.getElementById("pincodeError").innerHTML =#}
+{#            "Pincode must contain exactly 6 digits.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // PHOTO#}
+{#    // =========================#}
+{##}
+{#    let photo =#}
+{#        document.getElementById("photo").files[0];#}
+{##}
+{#    if (!photo) {#}
+{##}
+{#        document.getElementById("photoError").innerHTML =#}
+{#            "Please upload a photo.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (!photo.type.startsWith("image/")) {#}
+{##}
+{#        document.getElementById("photoError").innerHTML =#}
+{#            "Please upload a valid image.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // PASSWORD#}
+{#    // =========================#}
+{##}
+{#    let password =#}
+{#        document.getElementById("password").value;#}
+{##}
+{#    /*#}
+{#        (?=.*[a-z])       = lowercase#}
+{#        (?=.*[A-Z])       = uppercase#}
+{#        (?=.*[0-9])       = number#}
+{#        (?=.*[@$!%*?&])   = special character#}
+{#        .{8,}             = minimum 8 characters#}
+{#    */#}
+{##}
+{#    let passwordPattern =#}
+{#        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,}$/;#}
+{##}
+{#    if (password === "") {#}
+{##}
+{#        document.getElementById("passwordError").innerHTML =#}
+{#            "Password cannot be empty.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (!passwordPattern.test(password)) {#}
+{##}
+{#        document.getElementById("passwordError").innerHTML =#}
+{#            "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    // =========================#}
+{#    // CONFIRM PASSWORD#}
+{#    // =========================#}
+{##}
+{#    let confirmPassword =#}
+{#        document.getElementById("confirmPassword").value;#}
+{##}
+{#    if (confirmPassword === "") {#}
+{##}
+{#        document.getElementById("confirmPasswordError").innerHTML =#}
+{#            "Please confirm your password.";#}
+{##}
+{#        valid = false;#}
+{##}
+{#    } else if (password !== confirmPassword) {#}
+{##}
+{#        document.getElementById("confirmPasswordError").innerHTML =#}
+{#            "Passwords do not match.";#}
+{##}
+{#        valid = false;#}
+{#    }#}
+{##}
+{##}
+{#    return valid;#}
+{#}#}
+{##}
+{#</script>#}
+{##}
+{##}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">#}
+{#</script>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Registration Form</title>#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{##}
+{#    <style>#}
+{#        body {#}
+{#            background: #f4f5fb;#}
+{#        }#}
+{#        .reg-wrapper {#}
+{#            padding: 48px 16px;#}
+{#        }#}
+{#        .reg-card {#}
+{#            max-width: 760px;#}
+{#            margin: 0 auto;#}
+{#            background: #fff;#}
+{#            border-radius: 16px;#}
+{#            box-shadow: 0 8px 30px rgba(0,0,0,0.08);#}
+{#            overflow: hidden;#}
+{#        }#}
+{#        .reg-card-header {#}
+{#            background: linear-gradient(135deg, #4e73df, #6f42c1);#}
+{#            color: #fff;#}
+{#            padding: 28px 32px;#}
+{#            text-align: center;#}
+{#        }#}
+{#        .reg-card-header h2 {#}
+{#            margin: 0;#}
+{#            font-weight: 600;#}
+{#        }#}
+{#        .reg-card-header p {#}
+{#            margin: 6px 0 0;#}
+{#            font-size: 0.85rem;#}
+{#            opacity: 0.85;#}
+{#        }#}
+{#        .reg-card-body {#}
+{#            padding: 32px;#}
+{#        }#}
+{#        .reg-card-body label {#}
+{#            font-weight: 500;#}
+{#            color: #444;#}
+{#        }#}
+{#        .reg-card-body .form-control {#}
+{#            border-radius: 8px;#}
+{#            padding: 10px 12px;#}
+{#        }#}
+{#        .reg-card-body .form-control:focus {#}
+{#            border-color: #6f42c1;#}
+{#            box-shadow: 0 0 0 0.2rem rgba(111,66,193,0.15);#}
+{#        }#}
+{#        .section-label {#}
+{#            font-size: 0.78rem;#}
+{#            text-transform: uppercase;#}
+{#            letter-spacing: 0.05em;#}
+{#            color: #999;#}
+{#            font-weight: 600;#}
+{#            margin: 24px 0 12px;#}
+{#        }#}
+{#        .section-label:first-child {#}
+{#            margin-top: 0;#}
+{#        }#}
+{#        .error {#}
+{#            color: #dc3545;#}
+{#            font-size: 13px;#}
+{#            margin-top: 5px;#}
+{#        }#}
+{#        .btn-register {#}
+{#            background: linear-gradient(135deg, #4e73df, #6f42c1);#}
+{#            border: none;#}
+{#            padding: 10px 28px;#}
+{#            border-radius: 8px;#}
+{#            font-weight: 500;#}
+{#        }#}
+{#        .btn-register:hover {#}
+{#            opacity: 0.9;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<div class="reg-wrapper">#}
+{#  <div class="reg-card">#}
+{##}
+{#    <div class="reg-card-header">#}
+{#      <h2>Create Your Account</h2>#}
+{#      <p>Register to get started</p>#}
+{#    </div>#}
+{##}
+{#    <div class="reg-card-body">#}
+{#      <form action="/myapp/user_signup_post/"#}
+{#            method="post"#}
+{#            enctype="multipart/form-data"#}
+{#            onsubmit="return validateForm()">#}
+{##}
+{#        {% csrf_token %}#}
+{##}
+{#        <div class="section-label">Personal Details</div>#}
+{##}
+{#        <!-- Full Name -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="name" class="col-sm-4 col-form-label">Full Name</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="text" class="form-control" name="name" id="name" required>#}
+{#                <div id="nameError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Gender -->#}
+{#        <div class="row mb-3">#}
+{#            <label class="col-sm-4 col-form-label">Gender</label>#}
+{#            <div class="col-sm-8">#}
+{#                <div class="form-check form-check-inline">#}
+{#                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male">#}
+{#                    <label class="form-check-label" for="male">Male</label>#}
+{#                </div>#}
+{#                <div class="form-check form-check-inline">#}
+{#                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">#}
+{#                    <label class="form-check-label" for="female">Female</label>#}
+{#                </div>#}
+{#                <div id="genderError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Date of Birth -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="dob" class="col-sm-4 col-form-label">Date of Birth</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="date" class="form-control" name="dob" id="dob" required>#}
+{#                <div id="dobError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="section-label">Contact Details</div>#}
+{##}
+{#        <!-- Email -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="email" class="col-sm-4 col-form-label">Email Address</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="email" class="form-control" id="email" name="email" required>#}
+{#                <div id="emailError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Phone Number -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="phone" class="col-sm-4 col-form-label">Phone Number</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="tel" class="form-control" id="phone" name="Phone_number" maxlength="10" required>#}
+{#                <div id="phoneError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="section-label">Address</div>#}
+{##}
+{#        <!-- Place -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="place" class="col-sm-4 col-form-label">Place</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="text" class="form-control" id="place" name="place" required>#}
+{#                <div id="placeError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- City -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="city" class="col-sm-4 col-form-label">City</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="text" class="form-control" id="city" name="city" required>#}
+{#                <div id="cityError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- State -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="state" class="col-sm-4 col-form-label">State</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="text" class="form-control" id="state" name="state" required>#}
+{#                <div id="stateError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Pincode -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="pincode" class="col-sm-4 col-form-label">Pincode</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="text" class="form-control" id="pincode" name="pincode" maxlength="6" required>#}
+{#                <div id="pincodeError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="section-label">Profile & Security</div>#}
+{##}
+{#        <!-- Photo -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="photo" class="col-sm-4 col-form-label">Upload Photo</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="file" class="form-control" name="upload_photo" id="photo" accept="image/*" required>#}
+{#                <div id="photoError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Password -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="password" class="col-sm-4 col-form-label">Password</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="password" class="form-control" id="password" name="password" required>#}
+{#                <div id="passwordError" class="error"></div>#}
+{#                <small class="text-muted">#}
+{#                    Minimum 8 characters, including uppercase, lowercase, number and special character.#}
+{#                </small>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Confirm Password -->#}
+{#        <div class="row mb-3">#}
+{#            <label for="confirmPassword" class="col-sm-4 col-form-label">Confirm Password</label>#}
+{#            <div class="col-sm-8">#}
+{#                <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>#}
+{#                <div id="confirmPasswordError" class="error"></div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Register Button -->#}
+{#        <div class="row mb-3 mt-4">#}
+{#            <div class="offset-sm-4 col-sm-8">#}
+{#                <button type="submit" class="btn btn-register text-white">Register</button>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#      </form>#}
+{#    </div>#}
+{##}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<script>#}
+{##}
+{#function validateForm() {#}
+{##}
+{#    let valid = true;#}
+{##}
+{#    document.querySelectorAll(".error").forEach(function(error) {#}
+{#        error.innerHTML = "";#}
+{#    });#}
+{##}
+{#    // FULL NAME#}
+{#    let name = document.getElementById("name").value.trim();#}
+{#    let namePattern = /^[A-Za-z ]+$/;#}
+{##}
+{#    if (name === "") {#}
+{#        document.getElementById("nameError").innerHTML = "Full name cannot be empty.";#}
+{#        valid = false;#}
+{#    } else if (!namePattern.test(name)) {#}
+{#        document.getElementById("nameError").innerHTML = "Name should contain only letters.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // GENDER#}
+{#    let gender = document.querySelector('input[name="gender"]:checked');#}
+{#    if (!gender) {#}
+{#        document.getElementById("genderError").innerHTML = "Please select your gender.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // DATE OF BIRTH#}
+{#    let dob = document.getElementById("dob").value;#}
+{##}
+{#    if (dob === "") {#}
+{#        document.getElementById("dobError").innerHTML = "Date of birth cannot be empty.";#}
+{#        valid = false;#}
+{#    } else {#}
+{#        let selectedDate = new Date(dob);#}
+{#        let today = new Date();#}
+{##}
+{#        if (selectedDate > today) {#}
+{#            document.getElementById("dobError").innerHTML = "Date of birth cannot be in the future.";#}
+{#            valid = false;#}
+{#        }#}
+{#    }#}
+{##}
+{#    // EMAIL#}
+{#    let email = document.getElementById("email").value.trim();#}
+{#    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;#}
+{##}
+{#    if (email === "") {#}
+{#        document.getElementById("emailError").innerHTML = "Email cannot be empty.";#}
+{#        valid = false;#}
+{#    } else if (!emailPattern.test(email)) {#}
+{#        document.getElementById("emailError").innerHTML = "Please enter a valid email address.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // PHONE NUMBER#}
+{#    let phone = document.getElementById("phone").value.trim();#}
+{#    let phonePattern = /^[0-9]{10}$/;#}
+{##}
+{#    if (phone === "") {#}
+{#        document.getElementById("phoneError").innerHTML = "Phone number cannot be empty.";#}
+{#        valid = false;#}
+{#    } else if (!phonePattern.test(phone)) {#}
+{#        document.getElementById("phoneError").innerHTML = "Phone number must contain exactly 10 digits.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // PLACE#}
+{#    let place = document.getElementById("place").value.trim();#}
+{#    if (place === "") {#}
+{#        document.getElementById("placeError").innerHTML = "Place cannot be empty.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // CITY#}
+{#    let city = document.getElementById("city").value.trim();#}
+{#    if (city === "") {#}
+{#        document.getElementById("cityError").innerHTML = "City cannot be empty.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // STATE#}
+{#    let state = document.getElementById("state").value.trim();#}
+{#    if (state === "") {#}
+{#        document.getElementById("stateError").innerHTML = "State cannot be empty.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // PINCODE#}
+{#    let pincode = document.getElementById("pincode").value.trim();#}
+{#    let pincodePattern = /^[0-9]{6}$/;#}
+{##}
+{#    if (pincode === "") {#}
+{#        document.getElementById("pincodeError").innerHTML = "Pincode cannot be empty.";#}
+{#        valid = false;#}
+{#    } else if (!pincodePattern.test(pincode)) {#}
+{#        document.getElementById("pincodeError").innerHTML = "Pincode must contain exactly 6 digits.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // PHOTO#}
+{#    let photo = document.getElementById("photo").files[0];#}
+{##}
+{#    if (!photo) {#}
+{#        document.getElementById("photoError").innerHTML = "Please upload a photo.";#}
+{#        valid = false;#}
+{#    } else if (!photo.type.startsWith("image/")) {#}
+{#        document.getElementById("photoError").innerHTML = "Please upload a valid image.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // PASSWORD#}
+{#    let password = document.getElementById("password").value;#}
+{#    let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,}$/;#}
+{##}
+{#    if (password === "") {#}
+{#        document.getElementById("passwordError").innerHTML = "Password cannot be empty.";#}
+{#        valid = false;#}
+{#    } else if (!passwordPattern.test(password)) {#}
+{#        document.getElementById("passwordError").innerHTML =#}
+{#            "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    // CONFIRM PASSWORD#}
+{#    let confirmPassword = document.getElementById("confirmPassword").value;#}
+{##}
+{#    if (confirmPassword === "") {#}
+{#        document.getElementById("confirmPasswordError").innerHTML = "Please confirm your password.";#}
+{#        valid = false;#}
+{#    } else if (password !== confirmPassword) {#}
+{#        document.getElementById("confirmPasswordError").innerHTML = "Passwords do not match.";#}
+{#        valid = false;#}
+{#    }#}
+{##}
+{#    return valid;#}
+{#}#}
+{##}
+{#</script>#}
+{##}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaxiCare — User Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5FBFD;
+      --primary: #2C97D6;
+      --primary-deep: #1B6FA8;
+      --teal: #22C6A8;
+      --navy: #10263A;
+      --navy-soft: #5A7284;
+      --mist: #EAF6FB;
+      --border: #DBEEF6;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);
+      --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);
+      --error: #E5484D;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+        var(--bg);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 251, 253, .75);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 9px; }
+    .brand-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16.5px;
+      letter-spacing: -.01em;
+    }
+    .brand-name span { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy-soft);
+    }
+
+    /* Stage */
+    .stage {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      margin-bottom: 14px;
+    }
+    .breadcrumb b { color: var(--navy); font-weight: 600; }
+
+    /* Split card */
+    .split {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--white);
+    }
+
+    /* Preview panel */
+    .preview-panel {
+      position: relative;
+      padding: 30px 26px;
+      color: #fff;
+      background: linear-gradient(160deg, #2C97D6 0%, #1B6FA8 55%, #17A88F 130%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .preview-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px 200px at 15% 10%, rgba(255, 255, 255, .14), transparent 60%);
+    }
+    .pv-eyebrow {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .28);
+      padding: 5px 11px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .pv-eyebrow .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #8CF4D9;
+    }
+    .pv-title {
+      position: relative;
+      z-index: 2;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.35;
+      margin: 14px 0 18px;
+    }
+    .ticket {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    .ticket-top {
+      padding: 18px 18px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .cal-icon {
+      width: 48px;
+      height: 52px;
+      border-radius: 10px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .cal-icon .cal-month {
+      background: linear-gradient(135deg, var(--teal), #1FB79B);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 0;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .cal-icon .cal-day {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--navy);
+    }
+    .ticket-info { flex: 1; }
+    .ticket-vaccine {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 14.5px;
+    }
+    .ticket-date {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.82);
+      margin-top: 2px;
+    }
+    .ticket-divider {
+      position: relative;
+      height: 0;
+      border-top: 2px dashed rgba(255, 255, 255, 0.3);
+    }
+    .ticket-divider::before,
+    .ticket-divider::after {
+      content: "";
+      position: absolute;
+      top: -9px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+    .ticket-divider::before { left: -27px; }
+    .ticket-divider::after { right: -27px; }
+    .ticket-bottom {
+      padding: 14px 18px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ticket-time {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .ticket-time svg {
+      width: 15px;
+      height: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .ticket-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .ticket-status svg { width: 10px; height: 10px; }
+    .pv-note {
+      position: relative;
+      z-index: 2;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 20px;
+      text-align: center;
+    }
+    .pv-list {
+      position: relative;
+      z-index: 2;
+      margin-top: 18px;
+      list-style: none;
+      padding: 0;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.7;
+    }
+    .pv-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pv-list li svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    /* Form panel */
+    .form-panel {
+      padding: 30px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      max-height: none;
+    }
+    .form-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .form-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      margin: 7px 0 5px;
+    }
+    .form-desc {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+    .input-shell { position: relative; }
+    .input-shell svg {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14.5px;
+      height: 14.5px;
+      color: var(--navy-soft);
+      pointer-events: none;
+      z-index: 1;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="password"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10.5px 13px 10.5px 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    input[type="file"] {
+      padding-left: 13px;
+      font-size: 12.5px;
+      color: var(--navy-soft);
+    }
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3.5px rgba(44, 151, 214, .14);
+    }
+    .hint {
+      font-size: 11.5px;
+      color: var(--navy-soft);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .error {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* Gender radio pills */
+    .gender-row {
+      display: flex;
+      gap: 10px;
+    }
+    .gender-pill {
+      flex: 1;
+      position: relative;
+    }
+    .gender-pill input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      cursor: pointer;
+    }
+    .gender-pill label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10.5px 13px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy-soft);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      cursor: pointer;
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .gender-pill input[type="radio"]:checked + label {
+      border-color: var(--primary);
+      color: var(--primary-deep);
+      background: var(--mist);
+    }
+
+    /* Password eye toggle */
+    .input-shell.has-toggle input[type="password"],
+    .input-shell.has-toggle input[type="text"] {
+      padding-right: 40px;
+    }
+    .toggle-eye {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 17px;
+      height: 17px;
+      color: var(--navy-soft);
+      cursor: pointer;
+      z-index: 2;
+      pointer-events: auto;
+    }
+    .toggle-eye:hover { color: var(--primary-deep); }
+    .toggle-eye .eye-off { display: none; }
+    .toggle-eye.is-visible .eye { display: none; }
+    .toggle-eye.is-visible .eye-off { display: block; }
+
+    .submit-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      margin-top: 6px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      border: none;
+      border-radius: 11px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(27, 111, 168, .26);
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .submit-btn:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 12px 24px rgba(27, 111, 168, .32);
+      filter: brightness(1.04);
+    }
+    .submit-btn svg { width: 14.5px; height: 14.5px; }
+    .messages {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--navy-soft);
+    }
+    .messages .msg {
+      padding: 8px 12px;
+      background: var(--mist);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 6px;
+    }
+    .messages .msg.alert-success {
+      background: rgba(34, 198, 168, 0.12);
+      border-color: rgba(34, 198, 168, 0.3);
+      color: #0d8a72;
+    }
+    .messages .msg.alert-danger {
+      background: rgba(229, 72, 77, 0.1);
+      border-color: rgba(229, 72, 77, 0.3);
+      color: var(--error);
+    }
+    .messages .msg.alert-warning {
+      background: rgba(245, 166, 35, 0.12);
+      border-color: rgba(245, 166, 35, 0.32);
+      color: #a5680f;
+    }
+    .messages .msg.alert-info {
+      background: rgba(44, 151, 214, 0.1);
+      border-color: rgba(44, 151, 214, 0.28);
+      color: var(--primary-deep);
+    }
+    .messages .msg.alert-secondary {
+      background: var(--mist);
+      border-color: var(--border);
+      color: var(--navy-soft);
+    }
+    .section-label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--navy-soft);
+      font-weight: 700;
+      margin: 26px 0 12px;
+    }
+    .section-label:first-of-type { margin-top: 0; }
+
+    @media (max-width: 760px) {
+      .split { grid-template-columns: 1fr; }
+      .grid2 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav { padding: 14px 20px; }
+      .form-panel { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <div class="stage">
+    <div class="breadcrumb">Account &nbsp;/&nbsp; <b>User Registration</b></div>
+
+    <div class="split">
+      <!-- Left preview panel -->
+      <div class="preview-panel">
+        <div>
+          <span class="pv-eyebrow"><span class="dot"></span> Join VaxiCare</span>
+          <div class="pv-title">Create your account to book and track vaccine appointments.</div>
+          <div class="ticket">
+            <div class="ticket-top">
+              <div class="cal-icon">
+                <div class="cal-month">REG</div>
+                <div class="cal-day">+</div>
+              </div>
+              <div class="ticket-info">
+                <div class="ticket-vaccine">User signup</div>
+                <div class="ticket-date">Secure · Simple · Fast</div>
+              </div>
+            </div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-bottom">
+              <div class="ticket-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <path d="M12 2 L14 9 L21 9 L16 13 L18 20 L12 16 L6 20 L8 13 L3 9 L10 9 Z"/>
+                </svg>
+                <span>Personal account</span>
+              </div>
+              <div class="ticket-status">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                New
+              </div>
+            </div>
+          </div>
+          <ul class="pv-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Book available slots nearby
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Track your appointments
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Get reminders before your visit
+            </li>
+          </ul>
+        </div>
+        <div class="pv-note">Your details are kept secure and used only for verification</div>
+      </div>
+
+      <!-- Form panel -->
+      <div class="form-panel">
+        <span class="form-eyebrow">Users · Signup</span>
+        <h2 class="form-title">Registration form</h2>
+        <p class="form-desc">Fill in your details to create an account and start booking vaccine slots.</p>
+
+        <form action="/myapp/user_signup_post/" method="post"
+              enctype="multipart/form-data"
+              onsubmit="return validateForm()">
+          {% csrf_token %}
+
+          <div class="section-label">Personal details</div>
+
+          <!-- Full Name -->
+          <div class="field">
+            <label for="name">Full name</label>
+            <div class="input-shell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <input type="text" name="name" id="name" required placeholder="e.g. Anjali Menon">
+            </div>
+            <div id="nameError" class="error"></div>
+          </div>
+
+          <div class="grid2">
+            <!-- Gender -->
+            <div class="field">
+              <label>Gender</label>
+              <div class="gender-row">
+                <div class="gender-pill">
+                  <input type="radio" name="gender" id="male" value="Male">
+                  <label for="male">Male</label>
+                </div>
+                <div class="gender-pill">
+                  <input type="radio" name="gender" id="female" value="Female">
+                  <label for="female">Female</label>
+                </div>
+              </div>
+              <div id="genderError" class="error"></div>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="field">
+              <label for="dob">Date of birth</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <path d="M16 2v4M8 2v4M3 10h18"/>
+                </svg>
+                <input type="date" name="dob" id="dob" required>
+              </div>
+              <div id="dobError" class="error"></div>
+            </div>
+          </div>
+
+          <div class="section-label">Contact details</div>
+
+          <!-- Email -->
+          <div class="field">
+            <label for="email">Email address</label>
+            <div class="input-shell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M2 7l10 7 10-7"/>
+              </svg>
+              <input type="email" id="email" name="email" required placeholder="you@example.com">
+            </div>
+            <div id="emailError" class="error"></div>
+          </div>
+
+          <!-- Phone -->
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <div class="input-shell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <input type="tel" name="Phone_number" id="phone" maxlength="10" required placeholder="10-digit mobile number">
+            </div>
+            <div id="phoneError" class="error"></div>
+          </div>
+
+          <div class="section-label">Address</div>
+
+          <div class="grid2">
+            <!-- Place -->
+            <div class="field">
+              <label for="place">Place</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <input type="text" name="place" id="place" required placeholder="Area / locality">
+              </div>
+              <div id="placeError" class="error"></div>
+            </div>
+
+            <!-- City -->
+            <div class="field">
+              <label for="city">City</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 21h18M5 21V10l7-5 7 5v11"/>
+                </svg>
+                <input type="text" name="city" id="city" required placeholder="City">
+              </div>
+              <div id="cityError" class="error"></div>
+            </div>
+          </div>
+
+          <div class="grid2">
+            <!-- State -->
+            <div class="field">
+              <label for="state">State</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2 L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <input type="text" id="state" name="state" required placeholder="State">
+              </div>
+              <div id="stateError" class="error"></div>
+            </div>
+
+            <!-- Pincode -->
+            <div class="field">
+              <label for="pincode">Pincode</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M7 8h10M7 12h6"/>
+                </svg>
+                <input type="text" name="pincode" id="pincode" maxlength="6" required placeholder="6-digit pincode">
+              </div>
+              <div id="pincodeError" class="error"></div>
+            </div>
+          </div>
+
+          <div class="section-label">Profile &amp; security</div>
+
+          <!-- Photo -->
+          <div class="field">
+            <label for="photo">Upload photo</label>
+            <div class="input-shell">
+              <input type="file" id="photo" name="upload_photo" accept="image/*" required>
+            </div>
+            <div class="hint">A clear photo of yourself (image only).</div>
+            <div id="photoError" class="error"></div>
+          </div>
+
+          <!-- Password -->
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-shell has-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="password" name="password" required placeholder="Create a strong password">
+              <span class="toggle-eye" onclick="togglePassword('password', this)">
+                <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.6 18.6 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.6 18.6 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+                  <path d="M1 1l22 22"/>
+                </svg>
+              </span>
+            </div>
+            <div id="passwordError" class="error"></div>
+            <div class="hint">
+              At least 8 characters, with uppercase, lowercase, number and special character (@$!%*?&).
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="field">
+            <label for="confirmPassword">Confirm password</label>
+            <div class="input-shell has-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="confirmPassword" name="confirm_password" required placeholder="Re-enter password">
+              <span class="toggle-eye" onclick="togglePassword('confirmPassword', this)">
+                <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.6 18.6 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.6 18.6 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+                  <path d="M1 1l22 22"/>
+                </svg>
+              </span>
+            </div>
+            <div id="confirmPasswordError" class="error"></div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            Register
+          </button>
+        </form>
+ <div class="messages">
+  {% for k in messages %}
+    <div class="msg
+      {% if k.tags == 'success' %}alert-success
+      {% elif k.tags == 'error' %}alert-danger
+      {% elif k.tags == 'warning' %}alert-warning
+      {% elif k.tags == 'info' %}alert-info
+      {% else %}alert-secondary{% endif %}
+      py-2 mb-2">
+      {{ k }}
+    </div>
+  {% endfor %}
+</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, toggleEl) {
+      var input = document.getElementById(fieldId);
+      var isVisible = input.type === 'text';
+      input.type = isVisible ? 'password' : 'text';
+      toggleEl.classList.toggle('is-visible', !isVisible);
+    }
+
+    function validateForm() {
+      let valid = true;
+
+      document.querySelectorAll(".error").forEach(function (error) {
+        error.innerHTML = "";
+      });
+
+      // Full Name
+      let name = document.getElementById("name").value.trim();
+      let namePattern = /^[A-Za-z ]+$/;
+      if (name === "") {
+        document.getElementById("nameError").innerHTML = "Full name cannot be empty.";
+        valid = false;
+      } else if (!namePattern.test(name)) {
+        document.getElementById("nameError").innerHTML = "Name should contain only letters.";
+        valid = false;
+      }
+
+      // Gender
+      let gender = document.querySelector('input[name="gender"]:checked');
+      if (!gender) {
+        document.getElementById("genderError").innerHTML = "Please select your gender.";
+        valid = false;
+      }
+
+      // Date of Birth
+      let dob = document.getElementById("dob").value;
+      if (dob === "") {
+        document.getElementById("dobError").innerHTML = "Date of birth cannot be empty.";
+        valid = false;
+      } else {
+        let selectedDate = new Date(dob);
+        let today = new Date();
+        if (selectedDate > today) {
+          document.getElementById("dobError").innerHTML = "Date of birth cannot be in the future.";
+          valid = false;
+        }
+      }
+
+      // Email
+      let email = document.getElementById("email").value.trim();
+      let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (email === "") {
+        document.getElementById("emailError").innerHTML = "Email cannot be empty.";
+        valid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").innerHTML = "Please enter a valid email address.";
+        valid = false;
+      }
+
+      // Phone
+      let phone = document.getElementById("phone").value.trim();
+      let phonePattern = /^[0-9]{10}$/;
+      if (phone === "") {
+        document.getElementById("phoneError").innerHTML = "Phone number cannot be empty.";
+        valid = false;
+      } else if (!phonePattern.test(phone)) {
+        document.getElementById("phoneError").innerHTML = "Phone number must contain exactly 10 digits.";
+        valid = false;
+      }
+
+      // Place
+      let place = document.getElementById("place").value.trim();
+      if (place === "") {
+        document.getElementById("placeError").innerHTML = "Place cannot be empty.";
+        valid = false;
+      }
+
+      // City
+      let city = document.getElementById("city").value.trim();
+      if (city === "") {
+        document.getElementById("cityError").innerHTML = "City cannot be empty.";
+        valid = false;
+      }
+
+      // State
+      let state = document.getElementById("state").value.trim();
+      if (state === "") {
+        document.getElementById("stateError").innerHTML = "State cannot be empty.";
+        valid = false;
+      }
+
+      // Pincode
+      let pincode = document.getElementById("pincode").value.trim();
+      let pincodePattern = /^[0-9]{6}$/;
+      if (pincode === "") {
+        document.getElementById("pincodeError").innerHTML = "Pincode cannot be empty.";
+        valid = false;
+      } else if (!pincodePattern.test(pincode)) {
+        document.getElementById("pincodeError").innerHTML = "Pincode must contain exactly 6 digits.";
+        valid = false;
+      }
+
+      // Photo
+      let photo = document.getElementById("photo").files[0];
+      if (!photo) {
+        document.getElementById("photoError").innerHTML = "Please upload a photo.";
+        valid = false;
+      } else if (!photo.type.startsWith("image/")) {
+        document.getElementById("photoError").innerHTML = "Please upload a valid image.";
+        valid = false;
+      }
+
+      // Password
+      let password = document.getElementById("password").value;
+      let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).{8,}$/;
+      if (password === "") {
+        document.getElementById("passwordError").innerHTML = "Password cannot be empty.";
+        valid = false;
+      } else if (!passwordPattern.test(password)) {
+        document.getElementById("passwordError").innerHTML =
+          "Password must be at least 8 characters and contain uppercase, lowercase, number and special character.";
+        valid = false;
+      }
+
+      // Confirm Password
+      let confirmPassword = document.getElementById("confirmPassword").value;
+      if (confirmPassword === "") {
+        document.getElementById("confirmPasswordError").innerHTML = "Please confirm your password.";
+        valid = false;
+      } else if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").innerHTML = "Passwords do not match.";
+        valid = false;
+      }
+
+      return valid;
+    }
+  </script>
+</body>
+</html>

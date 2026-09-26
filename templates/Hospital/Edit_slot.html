@@ -1,0 +1,668 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Form</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{# #}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container">#}
+{#    <h2 class="mb-4">Edit slot</h2>#}
+{#    <form action="/myapp/h_slot_Edit_post/" method="post">#}
+{#        {% csrf_token %}#}
+{#    <input type="hidden" name="id" value="{{ data.id }}">#}
+{#      <div class="row mb-3">#}
+{#        <label for="name" class="col-sm-4 ">vaccine Name</label>#}
+{#        <div class="col-sm-8">#}
+{#            <select class="form-control" name="vaccine">#}
+{#                {% for i in data2 %}#}
+{#                <option value="{{ i.id }}" {% if i.id == data.VACCINATIONINFORMATION.id %}selected {% endif %}>{{ i.Vaccinename }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{#<div class="row mb-3">#}
+{#        <label for="place" class="col-sm-4 ">From time</label>#}
+{#        <div class="col-sm-8">#}
+{#            <input type="time" required  class="form-control" name="fromtime" value="{{ data.Fromtime | time:'H:i:s' }}" >#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="place" class="col-sm-4 " >Date</label>#}
+{##}
+{#        <div class="col-sm-8">#}
+{#        <input type="date" required  class="form-control" id="date" name="Date" value="{{ data.Date | date:'Y-m-d' }}" >#}
+{##}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#      <div class="row mb-3">#}
+{#        <div class="offset-sm-4 col-sm-8">#}
+{#          <button type="submit" class="btn btn-primary">Submit</button>#}
+{#        </div>#}
+{#      </div>#}
+{#    </form>#}
+{#  </div>#}
+{#  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{#<script>#}
+{#    let today = new Date().toISOString().split('T')[0];#}
+{#    document.getElementById("date").min = today;#}
+{#</script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#<meta charset="UTF-8">#}
+{#<meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#<title>VaxiCare — Edit Slot</title>#}
+{#<link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">#}
+{#<style>#}
+{#  :root{#}
+{#    --bg:#F5FBFD; --primary:#2C97D6; --primary-deep:#1B6FA8; --teal:#22C6A8;#}
+{#    --navy:#10263A; --navy-soft:#5A7284; --mist:#EAF6FB; --border:#DBEEF6; --white:#FFFFFF;#}
+{#    --shadow-sm:0 2px 8px rgba(16,38,58,.06);#}
+{#    --shadow-md:0 10px 26px rgba(28,111,168,.14);#}
+{#  }#}
+{#  *{box-sizing:border-box;}#}
+{#  html,body{margin:0;padding:0;}#}
+{#  body{#}
+{#    font-family:'Inter',sans-serif;color:var(--navy);min-height:100vh;-webkit-font-smoothing:antialiased;#}
+{#    background:#}
+{#      radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),#}
+{#      radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),#}
+{#      var(--bg);#}
+{#  }#}
+{#  a{text-decoration:none;color:inherit;}#}
+{##}
+{#  .nav{#}
+{#    display:flex;align-items:center;justify-content:space-between;padding:16px 40px;#}
+{#    position:sticky;top:0;z-index:20;background:rgba(245,251,253,.75);backdrop-filter:blur(10px);#}
+{#    border-bottom:1px solid var(--border);#}
+{#  }#}
+{#  .brand{display:flex;align-items:center;gap:9px;}#}
+{#  .brand-mark{width:28px;height:28px;display:block;}#}
+{#  .brand-name{font-family:'Sora',sans-serif;font-weight:700;font-size:16.5px;letter-spacing:-.01em;}#}
+{#  .brand-name span{color:var(--primary);}#}
+{#  .nav-links{display:flex;gap:28px;font-size:13.5px;font-weight:500;color:var(--navy-soft);}#}
+{#  .avatar-nav{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--teal));#}
+{#    display:grid;place-items:center;color:#fff;font-family:'Sora';font-weight:600;font-size:11.5px;box-shadow:var(--shadow-sm);}#}
+{##}
+{#  .stage{max-width:880px;margin:0 auto;padding:36px 24px 64px;}#}
+{#  .breadcrumb{font-size:12.5px;color:var(--navy-soft);margin-bottom:14px;}#}
+{#  .breadcrumb b{color:var(--navy);font-weight:600;}#}
+{##}
+{#  .split{#}
+{#    display:grid;grid-template-columns:0.85fr 1.15fr;border-radius:20px;overflow:hidden;#}
+{#    box-shadow:var(--shadow-md);background:var(--white);#}
+{#  }#}
+{##}
+{#  /* ---- signature: live appointment-slot ticket ---- */#}
+{#  .preview-panel{#}
+{#    position:relative;padding:30px 26px;color:#fff;#}
+{#    background:linear-gradient(160deg,#2C97D6 0%,#1B6FA8 55%,#17A88F 130%);#}
+{#    display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;#}
+{#  }#}
+{#  .preview-panel::before{#}
+{#    content:"";position:absolute;inset:0;#}
+{#    background:radial-gradient(280px 200px at 15% 10%,rgba(255,255,255,.14),transparent 60%);#}
+{#  }#}
+{#  .pv-eyebrow{#}
+{#    position:relative;z-index:2;display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;#}
+{#    letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);#}
+{#    padding:5px 11px;border-radius:999px;width:fit-content;#}
+{#  }#}
+{#  .pv-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:#8CF4D9;}#}
+{#  .pv-title{position:relative;z-index:2;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;line-height:1.35;margin:14px 0 18px;}#}
+{##}
+{#  /* ticket card */#}
+{#  .ticket{#}
+{#    position:relative;z-index:2;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.26);#}
+{#    border-radius:16px;overflow:hidden;backdrop-filter:blur(4px);#}
+{#  }#}
+{#  .ticket-top{padding:18px 18px 16px;display:flex;gap:14px;align-items:center;}#}
+{#  .cal-icon{#}
+{#    width:48px;height:52px;border-radius:10px;background:#fff;flex-shrink:0;#}
+{#    display:flex;flex-direction:column;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);#}
+{#  }#}
+{#  .cal-icon .cal-month{#}
+{#    background:linear-gradient(135deg,var(--teal),#1FB79B);color:#fff;font-size:9px;font-weight:700;#}
+{#    text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.03em;#}
+{#  }#}
+{#  .cal-icon .cal-day{#}
+{#    flex:1;display:flex;align-items:center;justify-content:center;#}
+{#    font-family:'Sora',sans-serif;font-weight:700;font-size:19px;color:var(--navy);#}
+{#  }#}
+{#  .ticket-info{flex:1;}#}
+{#  .ticket-vaccine{font-family:'Sora',sans-serif;font-weight:700;font-size:14.5px;}#}
+{#  .ticket-date{font-size:11.5px;color:rgba(255,255,255,0.82);margin-top:2px;}#}
+{##}
+{#  .ticket-divider{#}
+{#    position:relative;height:0;border-top:2px dashed rgba(255,255,255,0.3);margin:0 0;#}
+{#  }#}
+{#  .ticket-divider::before, .ticket-divider::after{#}
+{#    content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg);#}
+{#  }#}
+{#  .ticket-divider::before{left:-27px;}#}
+{#  .ticket-divider::after{right:-27px;}#}
+{##}
+{#  .ticket-bottom{padding:14px 18px 18px;display:flex;align-items:center;justify-content:space-between;}#}
+{#  .ticket-time{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;}#}
+{#  .ticket-time svg{width:15px;height:15px;color:rgba(255,255,255,0.85);}#}
+{#  .ticket-status{#}
+{#    display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.18);#}
+{#    border:1px solid rgba(255,255,255,0.3);padding:4px 10px;border-radius:999px;font-size:10px;font-weight:600;#}
+{#  }#}
+{#  .ticket-status svg{width:10px;height:10px;}#}
+{##}
+{#  .pv-note{position:relative;z-index:2;font-size:11px;color:rgba(255,255,255,0.65);margin-top:20px;text-align:center;}#}
+{##}
+{#  /* ---- form panel ---- */#}
+{#  .form-panel{padding:30px 32px;display:flex;flex-direction:column;justify-content:center;}#}
+{#  .form-eyebrow{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;}#}
+{#  .form-title{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;margin:7px 0 5px;}#}
+{#  .form-desc{font-size:12.5px;color:var(--navy-soft);line-height:1.5;margin-bottom:22px;}#}
+{##}
+{#  .field{margin-bottom:16px;}#}
+{#  .field label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;}#}
+{#  .input-shell{position:relative;}#}
+{#  .input-shell svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:14.5px;height:14.5px;color:var(--navy-soft);pointer-events:none;z-index:1;}#}
+{#  select, input[type="time"], input[type="date"]{#}
+{#    width:100%;padding:10.5px 13px 10.5px 36px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;color:var(--navy);#}
+{#    background:#fff;border:1.5px solid var(--border);border-radius:11px;outline:none;appearance:none;#}
+{#    transition:border-color .25s ease, box-shadow .25s ease;#}
+{#  }#}
+{#  select{#}
+{#    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A7284' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");#}
+{#    background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;#}
+{#  }#}
+{#  input:focus, select:focus{border-color:var(--primary);box-shadow:0 0 0 3.5px rgba(44,151,214,.14);}#}
+{#  .hint{font-size:11.5px;color:var(--navy-soft);margin-top:6px;}#}
+{##}
+{#  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}#}
+{##}
+{#  .submit-btn{#}
+{#    width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;margin-top:6px;#}
+{#    font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;color:#fff;#}
+{#    background:linear-gradient(135deg,var(--primary),var(--primary-deep));border:none;border-radius:11px;cursor:pointer;#}
+{#    box-shadow:0 8px 18px rgba(27,111,168,.26);transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;#}
+{#  }#}
+{#  .submit-btn:hover{transform:translateY(-1.5px);box-shadow:0 12px 24px rgba(27,111,168,.32);filter:brightness(1.04);}#}
+{#  .submit-btn svg{width:14.5px;height:14.5px;}#}
+{##}
+{#  @media (max-width:760px){#}
+{#    .split{grid-template-columns:1fr;}#}
+{#    .grid2{grid-template-columns:1fr;}#}
+{#    .nav-links{display:none;}#}
+{#  }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#  <nav class="nav">#}
+{#    <div class="brand">#}
+{#      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">#}
+{#        <defs><linearGradient id="gmark" x1="0" y1="0" x2="40" y2="40"><stop offset="0" stop-color="#2C97D6"/><stop offset="1" stop-color="#22C6A8"/></linearGradient></defs>#}
+{#        <path d="M20 3 L34 9 V19 C34 28 28 34.5 20 37 C12 34.5 6 28 6 19 V9 Z" fill="url(#gmark)"/>#}
+{#        <path d="M13 20 L18 25 L27 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>#}
+{#      </svg>#}
+{#      <span class="brand-name">Vaxi<span>Care</span></span>#}
+{#    </div>#}
+{#    <div class="nav-links"><a href="#">Dashboard</a><a href="#">Slots</a><a href="#">Patients</a><a href="#">Reports</a></div>#}
+{#    <div class="avatar-nav">HS</div>#}
+{#  </nav>#}
+{##}
+{#  <div class="stage">#}
+{#    <div class="breadcrumb">Slots &nbsp;/&nbsp; <b>Edit Slot</b></div>#}
+{##}
+{#    <div class="split">#}
+{#      <!-- SIGNATURE PANEL: live appointment ticket -->#}
+{#      <div class="preview-panel">#}
+{#        <div>#}
+{#          <span class="pv-eyebrow"><span class="dot"></span> Live preview</span>#}
+{#          <div class="pv-title">This is how the slot appears on the booking calendar.</div>#}
+{##}
+{#          <div class="ticket">#}
+{#            <div class="ticket-top">#}
+{#              <div class="cal-icon">#}
+{#                <div class="cal-month" id="tkMonth">AUG</div>#}
+{#                <div class="cal-day" id="tkDay">29</div>#}
+{#              </div>#}
+{#              <div class="ticket-info">#}
+{#                <div class="ticket-vaccine" id="tkVaccine">Covishield</div>#}
+{#                <div class="ticket-date" id="tkDateFull">Saturday, 29 August</div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="ticket-divider"></div>#}
+{#            <div class="ticket-bottom">#}
+{#              <div class="ticket-time">#}
+{#                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>#}
+{#                <span id="tkTime">10:00 AM</span>#}
+{#              </div>#}
+{#              <div class="ticket-status">#}
+{#                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>#}
+{#                Open#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="pv-note">Updates instantly as you change the details</div>#}
+{#      </div>#}
+{##}
+{#      <!-- FORM PANEL -->#}
+{#      <div class="form-panel">#}
+{#        <span class="form-eyebrow">Slots · Availability</span>#}
+{#        <h2 class="form-title">Edit slot</h2>#}
+{#        <p class="form-desc">Update the vaccine, date, and start time for this appointment slot.</p>#}
+{##}
+{#        <form id="slotForm">#}
+{#          <div class="field">#}
+{#            <label for="vaccine">Vaccine name</label>#}
+{#            <div class="input-shell">#}
+{#              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 3l-5 5M14 8l-9 9-2 3 3-2 9-9M14 8L11 5"/></svg>#}
+{##}
+{#<select id="vaccine" name="vaccine" onchange="syncPreview()">#}
+{#    <option value="{{ data.VACCINATIONINFORMATION.id }}" selected>#}
+{#        {{ data.VACCINATIONINFORMATION.Vaccinename }}#}
+{#    </option>#}
+{##}
+{#    {% for i in data2 %}#}
+{#        {% if i.id != data.VACCINATIONINFORMATION.id %}#}
+{#            <option value="{{ i.id }}">{{ i.Vaccinename }}</option>#}
+{#        {% endif %}#}
+{#    {% endfor %}#}
+{#</select>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="grid2">#}
+{#            <div class="field">#}
+{#              <label for="date">Date</label>#}
+{#              <div class="input-shell">#}
+{#                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>#}
+{#                <input type="date" id="date" onchange="syncPreview()" value="{{ data2.Date }}" required>#}
+{#              </div>#}
+{#              <div class="hint">Past dates can't be selected.</div>#}
+{#            </div>#}
+{#            <div class="field">#}
+{#              <label for="fromtime">From time</label>#}
+{#              <div class="input-shell">#}
+{#                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>#}
+{#                <input type="time" id="fromtime" value="{{ data2.Fromtime }}" oninput="syncPreview()" required>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <button type="submit" class="submit-btn">#}
+{#            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>#}
+{#            Save slot#}
+{#          </button>#}
+{#        </form>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#<script>#}
+{#  const vaccineNames = {#}
+{#    "1": "Covishield", "2": "Covaxin", "3": "Sputnik V", "4": "Influenza (Flu)"#}
+{#  };#}
+{#  const monthAbbr = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];#}
+{#  const weekdayFull = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];#}
+{#  const monthFull = ["January","February","March","April","May","June","July","August","September","October","November","December"];#}
+{##}
+{#  function syncPreview(){#}
+{#    const vaccine = document.getElementById('vaccine').value;#}
+{#    document.getElementById('tkVaccine').textContent = vaccineNames[vaccine] || 'Select a vaccine';#}
+{##}
+{#    const dateVal = document.getElementById('date').value;#}
+{#    if(dateVal){#}
+{#      const d = new Date(dateVal + 'T00:00:00');#}
+{#      document.getElementById('tkMonth').textContent = monthAbbr[d.getMonth()];#}
+{#      document.getElementById('tkDay').textContent = d.getDate();#}
+{#      document.getElementById('tkDateFull').textContent = weekdayFull[d.getDay()] + ', ' + d.getDate() + ' ' + monthFull[d.getMonth()];#}
+{#    }#}
+{##}
+{#    const timeVal = document.getElementById('fromtime').value;#}
+{#    if(timeVal){#}
+{#      const [h, m] = timeVal.split(':').map(Number);#}
+{#      const period = h >= 12 ? 'PM' : 'AM';#}
+{#      const h12 = ((h % 12) || 12);#}
+{#      document.getElementById('tkTime').textContent = h12 + ':' + String(m).padStart(2,'0') + ' ' + period;#}
+{#    }#}
+{#  }#}
+{##}
+{#  window.addEventListener('load', function(){#}
+{#    const today = new Date().toISOString().split('T')[0];#}
+{#    document.getElementById('date').min = today;#}
+{#    document.getElementById('date').value = today;#}
+{#    syncPreview();#}
+{#  });#}
+{##}
+{#  document.getElementById('slotForm').addEventListener('submit', function(e){#}
+{#    e.preventDefault();#}
+{#    alert('Demo only — this preview does not submit to a server.');#}
+{#  });#}
+{#</script>#}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VaxiCare — Edit Slot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5FBFD; --primary:#2C97D6; --primary-deep:#1B6FA8; --teal:#22C6A8;
+    --navy:#10263A; --navy-soft:#5A7284; --mist:#EAF6FB; --border:#DBEEF6; --white:#FFFFFF;
+    --shadow-sm:0 2px 8px rgba(16,38,58,.06);
+    --shadow-md:0 10px 26px rgba(28,111,168,.14);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',sans-serif;color:var(--navy);min-height:100vh;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+      var(--bg);
+  }
+  a{text-decoration:none;color:inherit;}
+
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;padding:16px 40px;
+    position:sticky;top:0;z-index:20;background:rgba(245,251,253,.75);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .brand{display:flex;align-items:center;gap:9px;}
+  .brand-mark{width:28px;height:28px;display:block;}
+  .brand-name{font-family:'Sora',sans-serif;font-weight:700;font-size:16.5px;letter-spacing:-.01em;}
+  .brand-name span{color:var(--primary);}
+  .nav-links{display:flex;gap:28px;font-size:13.5px;font-weight:500;color:var(--navy-soft);}
+  .avatar-nav{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--teal));
+    display:grid;place-items:center;color:#fff;font-family:'Sora';font-weight:600;font-size:11.5px;box-shadow:var(--shadow-sm);}
+
+  .stage{max-width:880px;margin:0 auto;padding:36px 24px 64px;}
+  .breadcrumb{font-size:12.5px;color:var(--navy-soft);margin-bottom:14px;}
+  .breadcrumb b{color:var(--navy);font-weight:600;}
+
+  .split{
+    display:grid;grid-template-columns:0.85fr 1.15fr;border-radius:20px;overflow:hidden;
+    box-shadow:var(--shadow-md);background:var(--white);
+  }
+
+  /* ---- signature: live appointment-slot ticket ---- */
+  .preview-panel{
+    position:relative;padding:30px 26px;color:#fff;
+    background:linear-gradient(160deg,#2C97D6 0%,#1B6FA8 55%,#17A88F 130%);
+    display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+  }
+  .preview-panel::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(280px 200px at 15% 10%,rgba(255,255,255,.14),transparent 60%);
+  }
+  .pv-eyebrow{
+    position:relative;z-index:2;display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;
+    letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:5px 11px;border-radius:999px;width:fit-content;
+  }
+  .pv-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:#8CF4D9;}
+  .pv-title{position:relative;z-index:2;font-family:'Sora',sans-serif;font-weight:700;font-size:16px;line-height:1.35;margin:14px 0 18px;}
+
+  /* ticket card */
+  .ticket{
+    position:relative;z-index:2;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.26);
+    border-radius:16px;overflow:hidden;backdrop-filter:blur(4px);
+  }
+  .ticket-top{padding:18px 18px 16px;display:flex;gap:14px;align-items:center;}
+  .cal-icon{
+    width:48px;height:52px;border-radius:10px;background:#fff;flex-shrink:0;
+    display:flex;flex-direction:column;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  }
+  .cal-icon .cal-month{
+    background:linear-gradient(135deg,var(--teal),#1FB79B);color:#fff;font-size:9px;font-weight:700;
+    text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.03em;
+  }
+  .cal-icon .cal-day{
+    flex:1;display:flex;align-items:center;justify-content:center;
+    font-family:'Sora',sans-serif;font-weight:700;font-size:19px;color:var(--navy);
+  }
+  .ticket-info{flex:1;}
+  .ticket-vaccine{font-family:'Sora',sans-serif;font-weight:700;font-size:14.5px;}
+  .ticket-date{font-size:11.5px;color:rgba(255,255,255,0.82);margin-top:2px;}
+
+  .ticket-divider{
+    position:relative;height:0;border-top:2px dashed rgba(255,255,255,0.3);margin:0 0;
+  }
+  .ticket-divider::before, .ticket-divider::after{
+    content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg);
+  }
+  .ticket-divider::before{left:-27px;}
+  .ticket-divider::after{right:-27px;}
+
+  .ticket-bottom{padding:14px 18px 18px;display:flex;align-items:center;justify-content:space-between;}
+  .ticket-time{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;}
+  .ticket-time svg{width:15px;height:15px;color:rgba(255,255,255,0.85);}
+  .ticket-status{
+    display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.3);padding:4px 10px;border-radius:999px;font-size:10px;font-weight:600;
+  }
+  .ticket-status svg{width:10px;height:10px;}
+
+  .pv-note{position:relative;z-index:2;font-size:11px;color:rgba(255,255,255,0.65);margin-top:20px;text-align:center;}
+
+  /* ---- form panel ---- */
+  .form-panel{padding:30px 32px;display:flex;flex-direction:column;justify-content:center;}
+  .form-eyebrow{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;}
+  .form-title{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;margin:7px 0 5px;}
+  .form-desc{font-size:12.5px;color:var(--navy-soft);line-height:1.5;margin-bottom:22px;}
+
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;}
+  .input-shell{position:relative;}
+  .input-shell svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:14.5px;height:14.5px;color:var(--navy-soft);pointer-events:none;z-index:1;}
+  select, input[type="time"], input[type="date"]{
+    width:100%;padding:10.5px 13px 10.5px 36px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;color:var(--navy);
+    background:#fff;border:1.5px solid var(--border);border-radius:11px;outline:none;appearance:none;
+    transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A7284' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;
+  }
+  input:focus, select:focus{border-color:var(--primary);box-shadow:0 0 0 3.5px rgba(44,151,214,.14);}
+  .hint{font-size:11.5px;color:var(--navy-soft);margin-top:6px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+  .submit-btn{
+    width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;margin-top:6px;
+    font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--primary-deep));border:none;border-radius:11px;cursor:pointer;
+    box-shadow:0 8px 18px rgba(27,111,168,.26);transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .submit-btn:hover{transform:translateY(-1.5px);box-shadow:0 12px 24px rgba(27,111,168,.32);filter:brightness(1.04);}
+  .submit-btn svg{width:14.5px;height:14.5px;}
+
+  @media (max-width:760px){
+    .split{grid-template-columns:1fr;}
+    .grid2{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+{% extends 'Hospital/Hospitalindex.html' %}
+{% block body %}
+
+
+
+
+  <div class="stage">
+    <div class="breadcrumb">Slots &nbsp;/&nbsp; <b>Edit Slot</b></div>
+
+    <div class="split">
+      <!-- SIGNATURE PANEL: live appointment ticket -->
+      <div class="preview-panel">
+        <div>
+          <span class="pv-eyebrow"><span class="dot"></span> Live preview</span>
+          <div class="pv-title">This is how the slot appears on the booking calendar.</div>
+
+          <div class="ticket">
+            <div class="ticket-top">
+              <div class="cal-icon">
+                <div class="cal-month" id="tkMonth">—</div>
+                <div class="cal-day" id="tkDay">—</div>
+              </div>
+              <div class="ticket-info">
+                <div class="ticket-vaccine" id="tkVaccine">{{ data.VACCINATIONINFORMATION.Vaccinename }}</div>
+                <div class="ticket-date" id="tkDateFull">—</div>
+              </div>
+            </div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-bottom">
+              <div class="ticket-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                <span id="tkTime">—</span>
+              </div>
+              <div class="ticket-status">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                Open
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-note">Updates instantly as you change the details</div>
+      </div>
+
+      <!-- FORM PANEL -->
+      <div class="form-panel">
+        <span class="form-eyebrow">Slots · Availability</span>
+        <h2 class="form-title">Edit slot</h2>
+        <p class="form-desc">Update the vaccine, date, and start time for this appointment slot.</p>
+
+        <form id="slotForm" method="post" action="/myapp/h_slot_Edit_post/">
+          {% csrf_token %}
+          <input type="hidden" name="id" value="{{ data.id }}">
+          <div class="field">
+            <label for="vaccine">Vaccine name</label>
+            <div class="input-shell">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 3l-5 5M14 8l-9 9-2 3 3-2 9-9M14 8L11 5"/></svg>
+
+    <select id="vaccine" name="vaccine" onchange="syncPreview()">
+        <option value="{{ data.VACCINATIONINFORMATION.id }}" selected>
+            {{ data.VACCINATIONINFORMATION.Vaccinename }}
+        </option>
+
+        {% for i in data2 %}
+            {% if i.id != data.VACCINATIONINFORMATION.id %}
+                <option value="{{ i.id }}">{{ i.Vaccinename }}</option>
+            {% endif %}
+        {% endfor %}
+</select>
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="date">Date</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <input type="date" id="date" onchange="syncPreview()" value="{{ data.Date|date:'Y-m-d' }}"  name="Date" required>
+              </div>
+              <div class="hint">Past dates can't be selected.</div>
+            </div>
+{#            <div class="field">#}
+{#              <label for="fromtime">From time</label>#}
+{#              <div class="input-shell">#}
+{#                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>#}
+{#                <input type="time" id="fromtime" value="{{ data.Fromtime|time:'H:i' }}" name="fromtime" oninput="syncPreview()" required>#}
+{#              </div>#}
+{#            </div>#}
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+            Edit slot
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const monthAbbr = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const weekdayFull = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const monthFull = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  function syncPreview(){
+    // Read the vaccine name straight from the selected <option>'s text,
+    // instead of a hardcoded id->name lookup that can go stale.
+    const vaccineSelect = document.getElementById('vaccine');
+    const selectedOption = vaccineSelect.options[vaccineSelect.selectedIndex];
+    document.getElementById('tkVaccine').textContent = selectedOption ? selectedOption.textContent.trim() : 'Select a vaccine';
+
+    const dateVal = document.getElementById('date').value;
+    if(dateVal){
+      const d = new Date(dateVal + 'T00:00:00');
+      document.getElementById('tkMonth').textContent = monthAbbr[d.getMonth()];
+      document.getElementById('tkDay').textContent = d.getDate();
+      document.getElementById('tkDateFull').textContent = weekdayFull[d.getDay()] + ', ' + d.getDate() + ' ' + monthFull[d.getMonth()];
+    }
+
+    const timeVal = document.getElementById('fromtime').value;
+    if(timeVal){
+      const [h, m] = timeVal.split(':').map(Number);
+      const period = h >= 12 ? 'PM' : 'AM';
+      const h12 = ((h % 12) || 12);
+      document.getElementById('tkTime').textContent = h12 + ':' + String(m).padStart(2,'0') + ' ' + period;
+    }
+  }
+
+  window.addEventListener('load', function(){
+    // Only restrict past dates — don't overwrite the slot's actual saved date.
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').min = today;
+    syncPreview();
+  });
+
+  // Form now posts normally to the Django view set in the form's action —
+  // no preventDefault needed since this isn't a demo anymore.
+</script>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,119 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Form</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{# #}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Admins/Adminindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container">#}
+{#    <h2 class="mb-4">Edit Country vaccine</h2>#}
+{#    <form action="/myapp/adm_Edit_countryvaccin_info_post/" method="post">#}
+{#        {% csrf_token %}#}
+{#    <input type="hidden" name="id" value="{{ data.id }}">#}
+{#      <div class="row mb-3">#}
+{#        <label for="name" class="col-sm-4 ">vaccine Name</label>#}
+{#        <div class="col-sm-8">#}
+{#            <select class="form-control" name="vaccine">#}
+{#                {% for i in data2 %}#}
+{#                <option value="{{ i.id }}" {% if i.id == data.VACCINATIONINFORMATION.id %}selected {% endif %}>{{ i.Vaccinename }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{#<div class="row mb-3">#}
+{#        <label for="place" class="col-sm-4 ">Destination Country</label>#}
+{#        <div class="col-sm-8">#}
+{#            <input type="text" required  class="form-control" name="Destination_country" value="{{ data.Destination_country }}" >#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="place" class="col-sm-4 " >Discription</label>#}
+{#        <div class="col-sm-8">#}
+{#            <textarea required class="form-control" name="Discription">{{ data.Discription }}</textarea>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#      <div class="row mb-3">#}
+{#        <div class="offset-sm-4 col-sm-8">#}
+{#          <button type="submit" class="btn btn-primary">Submit</button>#}
+{#        </div>#}
+{#      </div>#}
+{#    </form>#}
+{#  </div>#}
+{#  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{% extends 'Admins/Adminindex.html' %}
+{% block body %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+        <div class="card-header text-white py-4 border-0"
+             style="background: linear-gradient(135deg, #87CEEB, #5BC0EB);">
+          <h3 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Edit Country Vaccine</h3>
+          <p class="mb-0 small opacity-75">Update the vaccine requirement for this country</p>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+          <form action="/myapp/adm_Edit_countryvaccin_info_post/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ data.id }}">
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold"><i class="bi bi-capsule me-1 text-info"></i>Vaccine Name</label>
+              <select class="form-select form-select-lg" name="vaccine">
+                {% for i in data2 %}
+                <option value="{{ i.id }}" {% if i.id == data.VACCINATIONINFORMATION.id %}selected{% endif %}>
+                  {{ i.Vaccinename }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold"><i class="bi bi-geo-alt me-1 text-info"></i>Destination Country</label>
+              <input type="text" required class="form-control form-control-lg"
+                     name="Destination_country" value="{{ data.Destination_country }}">
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold"><i class="bi bi-card-text me-1 text-info"></i>Description</label>
+              <textarea required class="form-control" name="Discription" rows="4">{{ data.Discription }}</textarea>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <button type="submit" class="btn text-white px-4 rounded-3"
+                      style="background: linear-gradient(135deg, #87CEEB, #5BC0EB);">
+                <i class="bi bi-check2-circle me-1"></i>Update
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

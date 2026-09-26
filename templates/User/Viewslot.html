@@ -1,0 +1,583 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>View stock  </title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#  <div class="container mt-5">#}
+{#      <div style="display: flex;justify-content: space-between">#}
+{#{% for i in sdate %}#}
+{#    <div>#}
+{#    <button>{{ i }}</button>#}
+{#    </div>#}
+{#{% endfor %}#}
+{##}
+{#      </div>#}
+{#  <div class="container">#}
+{#      <div class="row">#}
+{#          {% for i in data %}#}
+{##}
+{#          <div class="col-lg-3">#}
+{#          {% if i.status == 'No' %}#}
+{#          <button>Book</button>#}
+{#          {% else %}#}
+{#          already booked#}
+{#          {% endif %}#}
+{#          </div>#}
+{#{% endfor %}#}
+{#      </div>#}
+{##}
+{#  </div>#}
+{#    <h2 class="mb-4">View vaccine stock</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>#</th>#}
+{#          <th>vaccine Name</th>#}
+{#          <th>Age group</th>#}
+{#          <th>Dose number</th>#}
+{#          <th>Discription</th>#}
+{#          <th>Side effect</th>#}
+{#          <th>Manufactering  company</th>#}
+{#          <th>Emergency</th>#}
+{#          <th>Stock</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Vaccinename }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Age }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Dose_number }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Description }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Side_effect }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Manufacture }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Emergency_type }}</td>#}
+{##}
+{#          <td>{{ i.stock_no }} </td>#}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#</body>#}
+{#</html>#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{##}
+{#    <meta charset="UTF-8">#}
+{##}
+{#    <title>View Slots</title>#}
+{##}
+{#    <link#}
+{#        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"#}
+{#        rel="stylesheet"#}
+{#    >#}
+{##}
+{#    <style>#}
+{##}
+{#        .date-container {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            gap: 15px;#}
+{#            flex-wrap: wrap;#}
+{#            margin-bottom: 30px;#}
+{#        }#}
+{##}
+{#        .date-btn {#}
+{#            padding: 10px 20px;#}
+{#            border-radius: 8px;#}
+{#            text-decoration: none;#}
+{#            background-color: #0d6efd;#}
+{#            color: white;#}
+{#            border: none;#}
+{#        }#}
+{##}
+{#        .date-btn:hover {#}
+{#            background-color: #084298;#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .slot-container {#}
+{#            display: flex;#}
+{#            flex-wrap: wrap;#}
+{#            gap: 20px;#}
+{#        }#}
+{##}
+{#        .slot-card {#}
+{#            width: 280px;#}
+{#        }#}
+{##}
+{#    </style>#}
+{##}
+{#</head>#}
+{##}
+{#<body>#}
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{#<div class="container mt-5">#}
+{##}
+{#    <h2 class="mb-4">Available Vaccination Slots</h2>#}
+{##}
+{##}
+{#    <!-- DATE BUTTONS -->#}
+{##}
+{#    <div class="date-container">#}
+{##}
+{#        {% for i in sdate %}#}
+{##}
+{#            <a#}
+{#                href="/myapp/U_view_slot_get/{{ hospital_id }}/{{ i|date:'Y-m-d' }}/"#}
+{#                class="date-btn"#}
+{#            >#}
+{##}
+{#                {{ i|date:"d-m-Y" }}#}
+{##}
+{#            </a>#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{##}
+{##}
+{#    <!-- SLOTS -->#}
+{##}
+{#    <div class="slot-container">#}
+{##}
+{#        {% for i in data %}#}
+{##}
+{#            <div class="card slot-card">#}
+{##}
+{#                <div class="card-body">#}
+{##}
+{#                    <h5 class="card-title">#}
+{#                        {{ i.Vaccinename }}#}
+{#                    </h5>#}
+{##}
+{#                    <p class="card-text">#}
+{##}
+{#                        <b>Age:</b>#}
+{#                        {{ i.Age }}#}
+{#                        <br>#}
+{##}
+{#                        <b>Date:</b>#}
+{#                        {{ i.Date }}#}
+{#                        <br>#}
+{##}
+{#                        <b>Time:</b>#}
+{#                        {{ i.Fromtime }}#}
+{#                        <br>#}
+{##}
+{#                        <b>Side Effect:</b>#}
+{#                        {{ i.Side_effect }}#}
+{##}
+{#                    </p>#}
+{##}
+{##}
+{#                    {% if i.status == 'No' %}#}
+{##}
+{#                        <a#}
+{#                            href="/myapp/U_view_conform_slot/{{ i.id }}"#}
+{#                            class="btn btn-success"#}
+{#                        >#}
+{#                            Book#}
+{#                        </a>#}
+{##}
+{#                    {% else %}#}
+{##}
+{#                        <button#}
+{#                            class="btn btn-secondary"#}
+{#                            disabled#}
+{#                        >#}
+{#                            Already Booked#}
+{#                        </button>#}
+{##}
+{#                    {% endif %}#}
+{##}
+{#                </div>#}
+{##}
+{#            </div>#}
+{##}
+{#        {% empty %}#}
+{##}
+{#            <p>#}
+{#                No slots available for this date.#}
+{#            </p>#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{##}
+{#</div>#}
+{##}
+{##}
+{#<script#}
+{#    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">#}
+{#</script>#}
+{#{% endblock %}#}
+{#</body>#}
+{##}
+{#</html>#}
+{##}
+{##}
+{#{% extends 'User/Userindex.html' %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#<style>#}
+{#    .date-container {#}
+{#        display: flex;#}
+{#        justify-content: space-between;#}
+{#        align-items: center;#}
+{#        gap: 15px;#}
+{#        flex-wrap: wrap;#}
+{#        margin-bottom: 35px;#}
+{#    }#}
+{##}
+{#    .date-btn {#}
+{#        padding: 10px 20px;#}
+{#        border-radius: 8px;#}
+{#        text-decoration: none;#}
+{#        background-color: #0d6efd;#}
+{#        color: white;#}
+{#        border: none;#}
+{#        min-width: 120px;#}
+{#        text-align: center;#}
+{#    }#}
+{##}
+{#    .date-btn:hover {#}
+{#        background-color: #084298;#}
+{#        color: white;#}
+{#    }#}
+{##}
+{#    .slot-card {#}
+{#        height: 100%;#}
+{#    }#}
+{#</style>#}
+{##}
+{#<div class="container mt-5">#}
+{##}
+{#    <h2 class="mb-4">#}
+{#        Available {{ vaccine.Vaccinename }} Slots#}
+{#    </h2>#}
+{##}
+{#    <!-- DATE BUTTONS -->#}
+{#    <div class="date-container">#}
+{##}
+{#        {% for i in sdate %}#}
+{##}
+{#            <a#}
+{#                href="/myapp/U_view_slot_get/{{ hospital_id }}/{{ vaccine_id }}/{{ i|date:'Y-m-d' }}/"#}
+{#                class="date-btn"#}
+{#            >#}
+{#                {{ i|date:"d-m-Y" }}#}
+{#            </a>#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{##}
+{##}
+{#    <!-- SLOTS -->#}
+{#    <div class="row g-4">#}
+{##}
+{#        {% for i in data %}#}
+{##}
+{#            <!-- 4 CARDS PER ROW -->#}
+{#            <div class="col-lg-3 col-md-6 col-sm-12">#}
+{##}
+{#                <div class="card slot-card shadow-sm">#}
+{##}
+{#                    <div class="card-body">#}
+{##}
+{#                        <h5 class="card-title">#}
+{#                            {{ i.Vaccinename }}#}
+{#                        </h5>#}
+{##}
+{#                        <p class="card-text">#}
+{##}
+{#                            <b>Hospital:</b>#}
+{#                            {{ i.Hospital }}#}
+{#                            <br>#}
+{##}
+{#                            <b>Age:</b>#}
+{#                            {{ i.Age }}#}
+{#                            <br>#}
+{##}
+{#                            <b>Date:</b>#}
+{#                            {{ i.Date }}#}
+{#                            <br>#}
+{##}
+{#                            <b>Time:</b>#}
+{#                            {{ i.Fromtime }}#}
+{#                            <br>#}
+{##}
+{#                            <b>Side Effect:</b>#}
+{#                            {{ i.Side_effect }}#}
+{##}
+{#                        </p>#}
+{##}
+{#                        {% if i.status == 'No' %}#}
+{##}
+{#                            <a#}
+{#                                href="/myapp/U_view_conform_slot/{{ i.id }}"#}
+{#                                class="btn btn-success"#}
+{#                            >#}
+{#                                Book#}
+{#                            </a>#}
+{##}
+{#                        {% else %}#}
+{##}
+{#                            <button#}
+{#                                class="btn btn-secondary"#}
+{#                                disabled#}
+{#                            >#}
+{#                                Already Booked#}
+{#                            </button>#}
+{##}
+{#                        {% endif %}#}
+{##}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{##}
+{#            </div>#}
+{##}
+{#        {% empty %}#}
+{##}
+{#            <div class="col-12">#}
+{##}
+{#                <div class="alert alert-warning">#}
+{#                    No slots available for this vaccine.#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{##}
+{#</div>#}
+{##}
+{#{% endblock %}#}
+{% extends 'User/Userindex.html' %}
+{% block body %}
+
+<style>
+  .slots-wrapper {
+    padding: 20px 16px 40px;
+  }
+  .slots-header {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+  }
+  .slots-header h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+  .slots-header p {
+    margin: 6px 0 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+  }
+
+  .date-container {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .date-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #fff;
+    color: #0284c7;
+    border: 1px solid #e2ddf7;
+    font-weight: 500;
+    font-size: 0.88rem;
+    min-width: 110px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+  }
+  .date-btn:hover {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #fff;
+    border-color: transparent;
+  }
+  .date-btn.active {
+   background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #fff;
+    border-color: transparent;
+  }
+
+  .slot-card {
+    background: #fff;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .slot-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.1);
+  }
+  .slot-card-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .slot-title {
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 2px;
+  }
+  .slot-hospital {
+    font-size: 0.8rem;
+    color: #0284c7;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .slot-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  .slot-info-list li {
+    padding: 4px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    justify-content: space-between;
+  }
+  .slot-info-list li:last-child {
+    border-bottom: none;
+  }
+  .slot-info-list li span.label {
+    color: #888;
+    font-weight: 500;
+  }
+  .slot-time-chip {
+    background: #f5f3ff;
+    color: #0284c7;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+  }
+  .btn-book-slot {
+   background: linear-gradient(135deg, #38bdf8, #0284c7);
+    border: none;
+    color: #fff;
+    text-align: center;
+    padding: 9px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: auto;
+  }
+  .btn-book-slot:hover {
+    opacity: 0.9;
+    color: #fff;
+  }
+  .btn-already-booked {
+    background: #eef0f5;
+    color: #888;
+    border: none;
+    padding: 9px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-top: auto;
+  }
+</style>
+
+<div class="slots-wrapper">
+
+  <div class="slots-header">
+    <h2>Available {{ vaccine.Vaccinename }} Slots</h2>
+    <p>Pick a date, then choose an open slot to book</p>
+  </div>
+
+  <!-- DATE BUTTONS -->
+  <div class="date-container">
+    {% for i in sdate %}
+      <a href="/myapp/U_view_slot_get/{{ hospital_id }}/{{ vaccine_id }}/{{ i|date:'Y-m-d' }}/" class="date-btn">
+        {{ i|date:"d-m-Y" }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <!-- SLOTS -->
+  <div class="row g-4">
+    {% for i in data %}
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="slot-card">
+          <div class="slot-card-body">
+
+{#            <div class="slot-title">{{ i.Vaccinename }}</div>#}
+{#            <div class="slot-hospital">{{ i.Hospital }}</div>#}
+{##}
+{#            <ul class="slot-info-list">#}
+{#              <li><span class="label">Age Group</span> {{ i.Age }}</li>#}
+{#              <li><span class="label">Side Effect</span> {{ i.Side_effect }}</li>#}
+{#            </ul>#}
+
+            <div class="slot-time-chip">
+              📅 {{ i.Date }} &nbsp;|&nbsp; ⏰ {{ i.Fromtime }}
+            </div>
+
+            {% if i.status == 'No' %}
+              <a href="/myapp/U_view_conform_slot/{{ i.id }}#t" class="btn-book-slot">Book</a>
+            {% else %}
+              <button class="btn-already-booked" disabled>Already Booked</button>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-warning">
+          No slots available for this vaccine.
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

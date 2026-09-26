@@ -1,0 +1,788 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Edit profile</title>#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{# #}
+{#</head>#}
+{#<body>#}
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container">#}
+{#    <h2 class="mb-4">Edit profile</h2>#}
+{#    <form action="/myapp/U_edit_profile_post/" method="post" enctype="multipart/form-data">#}
+{##}
+{#        {% csrf_token %}#}
+{#      <div class="row mb-3">#}
+{#        <label for="name" class="col-sm-4 ">Full Name</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" value="{{ data.name }}" name="name" id="name" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label class="col-sm-4 ">Gender</label>#}
+{#        <div class="col-sm-8">#}
+{#          <div class="form-check form-check-inline">#}
+{#            <input class="form-check-input" {% if data.gender == "Male" %} checked {% endif %} type="radio" name="gender" id="male" value="Male" required>#}
+{#            <label class="form-check-label" for="male">Male</label>#}
+{#          </div>#}
+{#          <div class="form-check form-check-inline">#}
+{#            <input class="form-check-input" {% if data.gender == "Female" %} checked {% endif %} type="radio" name="gender" id="female" value="Female" required>#}
+{#            <label class="form-check-label" for="female">Female</label>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="dob" class="col-sm-4 ">Date of Birth</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="date" class="form-control" value="{{ data.Dob|date:'Y-m-d' }}" name="dob" id="dob" required>#}
+{##}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="email" class="col-sm-4 " >Email address</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="email" class="form-control" value="{{ data.email }}"  id="email" name="email" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="phone" class="col-sm-4 " >Phone Number</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="tel" pattern="[0-9]{10}" class="form-control" value="{{ data.phone}}" id="phone"  name="Phone_number" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="place" class="col-sm-4 " >Place</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control"   value="{{ data.place }}" id="place" name="place" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="city" class="col-sm-4 ">City</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" value="{{ data.city }}" id="city"  name="city" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="state" class="col-sm-4 " >State</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" class="form-control" id="state"  value="{{ data.state }}" name="state" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="pincode" class="col-sm-4 " >Pincode</label>#}
+{#        <div class="col-sm-8">#}
+{#          <input type="text" pattern="[0-9]{6}" class="form-control" value="{{ data.pincode}}" id="pincode" name="pincode" required>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <div class="row mb-3">#}
+{#        <label for="photo" class="col-sm-4 " >Upload Photo</label>#}
+{#        <div class="col-sm-8">#}
+{#            <img src="{{ data.Upload_photo }}" height="100px" width="100px">#}
+{#          <input type="file" class="form-control" name="upload_photo"  id="photo" accept="image/*" >#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+{##}
+{##}
+{#      <div class="row mb-3">#}
+{#        <div class="offset-sm-4 col-sm-8">#}
+{#          <button type="submit" class="btn btn-primary">Edit</button>#}
+{#        </div>#}
+{#      </div>#}
+{#    </form>#}
+{#  </div>#}
+{#  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
+{% extends 'User/Userindex.html' %}
+{% block body %}
+
+<style>
+  :root {
+    --sky: #eaf7ff;
+    --sky-light: #f7fcff;
+    --sky-blue: #38a9e8;
+    --sky-deep: #168dcc;
+    --navy: #17324d;
+    --text: #34495e;
+    --muted: #8293a3;
+    --line: #e2eef5;
+    --white: #ffffff;
+  }
+
+  .edit-profile-page {
+    min-height: 100vh;
+    padding: 45px 20px 80px;
+    background:
+      radial-gradient(circle at 8% 5%, rgba(56,169,232,.16), transparent 28%),
+      radial-gradient(circle at 92% 10%, rgba(20,184,166,.10), transparent 25%),
+      linear-gradient(180deg, var(--sky) 0%, var(--sky-light) 50%, #fff 100%);
+  }
+
+  .edit-profile-container {
+    max-width: 850px;
+    margin: auto;
+  }
+
+  /* Page Heading */
+  .edit-heading {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .edit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 15px;
+    border-radius: 50px;
+    background: rgba(56,169,232,.10);
+    border: 1px solid rgba(56,169,232,.20);
+    color: var(--sky-deep);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .edit-heading h1 {
+    margin: 13px 0 5px;
+    color: var(--navy);
+    font-size: 31px;
+    font-weight: 700;
+  }
+
+  .edit-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* Card */
+  .edit-profile-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 55px rgba(36,139,190,.12);
+  }
+
+  /* Header */
+  .edit-card-header {
+    position: relative;
+    padding: 32px 25px 38px;
+    text-align: center;
+    color: #fff;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,.25), transparent 25%),
+      radial-gradient(circle at 85% 10%, rgba(255,255,255,.18), transparent 28%),
+      linear-gradient(135deg, #42b7ee, #188fd0);
+  }
+
+  .edit-card-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .edit-photo {
+    position: relative;
+    z-index: 2;
+    width: 105px;
+    height: 105px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background: #eef8fd;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    display: block;
+    margin: 0 auto 13px;
+  }
+
+  .edit-card-header h2 {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-size: 23px;
+    font-weight: 700;
+  }
+
+  .edit-card-header p {
+    position: relative;
+    z-index: 2;
+    margin: 5px 0 0;
+    font-size: 13px;
+    opacity: .9;
+  }
+
+  /* Body */
+  .edit-profile-body {
+    padding: 25px 45px 40px;
+  }
+
+  /* Section */
+  .edit-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .edit-section-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--sky);
+    color: var(--sky-deep);
+  }
+
+  /* Form */
+  .edit-profile-body .form-label {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .edit-profile-body .form-control {
+    min-height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fbfdff;
+    color: var(--text);
+    font-size: 14px;
+    padding: 10px 13px;
+    transition: .2s ease;
+  }
+
+  .edit-profile-body .form-control:hover {
+    border-color: #b9dfee;
+  }
+
+  .edit-profile-body .form-control:focus {
+    border-color: var(--sky-blue);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(56,169,232,.12);
+  }
+
+  .edit-profile-body .form-control[readonly] {
+    background: #f1f7fb;
+    color: #7b8d9b;
+    cursor: not-allowed;
+  }
+
+  /* Radio */
+  .gender-box {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .gender-box .form-check {
+    margin: 0;
+  }
+
+  .gender-box .form-check-input {
+    border-color: #b8d6e4;
+  }
+
+  .gender-box .form-check-input:checked {
+    background-color: var(--sky-deep);
+    border-color: var(--sky-deep);
+  }
+
+  .gender-box .form-check-label {
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  /* Upload */
+  .photo-upload-box {
+    padding: 12px;
+    border: 1px dashed #b9dfee;
+    border-radius: 14px;
+    background: #f7fcff;
+  }
+
+  .current-photo {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+  }
+
+  .photo-upload-box .form-control {
+    min-height: 44px;
+  }
+
+  /* Buttons */
+  .edit-actions {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .btn-cancel {
+    min-height: 46px;
+    padding: 10px 22px;
+    border: 1px solid #d8e7ef;
+    border-radius: 12px;
+    color: var(--text);
+    background: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s ease;
+  }
+
+  .btn-cancel:hover {
+    background: #f3faff;
+    color: var(--sky-deep);
+    border-color: #b9dfee;
+  }
+
+  .btn-save {
+    min-height: 46px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 12px;
+    color: #fff !important;
+    background: linear-gradient(135deg, var(--sky-blue), var(--sky-deep));
+    box-shadow: 0 8px 20px rgba(38,155,211,.22);
+    font-size: 14px;
+    font-weight: 700;
+    transition: .2s ease;
+  }
+
+  .btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(38,155,211,.30);
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+
+    .edit-profile-page {
+      padding: 30px 14px 60px;
+    }
+
+    .edit-profile-body {
+      padding: 22px 20px 30px;
+    }
+
+    .edit-heading h1 {
+      font-size: 27px;
+    }
+
+    .edit-actions {
+      flex-direction: column-reverse;
+    }
+
+    .btn-save,
+    .btn-cancel {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="edit-profile-page">
+
+  <div class="edit-profile-container">
+
+
+<!-- Page Heading -->
+<div class="edit-heading">
+
+  <span class="edit-badge">
+    <i class="bi bi-person-gear"></i>
+    VaxiCare · Account
+  </span>
+
+  <h1>Edit Profile</h1>
+
+  <p>Update your personal and contact information</p>
+
+</div>
+
+
+<!-- Card -->
+<div class="edit-profile-card">
+
+  <!-- Header -->
+  <div class="edit-card-header">
+
+    <img
+      src="{{ data.Upload_photo }}"
+      class="edit-photo"
+      alt="Profile photo"
+    >
+
+    <h2>{{ data.name }}</h2>
+
+    <p>
+      <i class="bi bi-envelope me-1"></i>
+      {{ data.email }}
+    </p>
+
+  </div>
+
+
+  <!-- Body -->
+  <div class="edit-profile-body">
+
+    <form
+      action="/myapp/U_edit_profile_post/"
+      method="post"
+      enctype="multipart/form-data"
+    >
+
+      {% csrf_token %}
+
+
+      <!-- Personal Information -->
+      <div class="edit-section">
+        <span class="edit-section-icon">
+           <span style="font-size:18px;">👤</span>
+        </span>
+        Personal Information
+      </div>
+
+
+      <div class="row g-3 mb-4">
+
+        <div class="col-md-6">
+          <label for="name" class="form-label">
+            Full Name
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            value="{{ data.name }}"
+            name="name"
+            id="name"
+            required
+          >
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label class="form-label">
+            Gender
+          </label>
+
+          <div class="gender-box">
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                {% if data.gender == "Male" %}checked{% endif %}
+                type="radio"
+                name="gender"
+                id="male"
+                value="Male"
+                required
+              >
+
+              <label class="form-check-label" for="male">
+                Male
+              </label>
+            </div>
+
+
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                {% if data.gender == "Female" %}checked{% endif %}
+                type="radio"
+                name="gender"
+                id="female"
+                value="Female"
+                required
+              >
+
+              <label class="form-check-label" for="female">
+                Female
+              </label>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label for="dob" class="form-label">
+            Date of Birth
+          </label>
+
+          <input
+            type="date"
+            class="form-control"
+            value="{{ data.Dob|date:'Y-m-d' }}"
+            name="dob"
+            id="dob"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Contact Information -->
+      <div class="edit-section">
+        <span class="edit-section-icon">
+          <i class="bi bi-telephone"></i>
+        </span>
+        Contact Information
+      </div>
+
+
+      <div class="row g-3 mb-4">
+
+        <div class="col-md-6">
+
+          <label for="email" class="form-label">
+            Email Address
+          </label>
+
+          <input
+            type="email"
+            class="form-control"
+            value="{{ data.email }}"
+            id="email"
+            name="email"
+            readonly
+          >
+
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label for="phone" class="form-label">
+            Phone Number
+          </label>
+
+          <input
+            type="tel"
+            pattern="[0-9]{10}"
+            class="form-control"
+            value="{{ data.phone }}"
+            id="phone"
+            name="Phone_number"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Address -->
+      <div class="edit-section">
+        <span class="edit-section-icon">
+          <i class="bi bi-geo-alt"></i>
+        </span>
+        Address
+      </div>
+
+
+      <div class="row g-3 mb-4">
+
+        <div class="col-md-6">
+
+          <label for="place" class="form-label">
+            Place
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            value="{{ data.place }}"
+            id="place"
+            name="place"
+            required
+          >
+
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label for="city" class="form-label">
+            City
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            value="{{ data.city }}"
+            id="city"
+            name="city"
+            required
+          >
+
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label for="state" class="form-label">
+            State
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            value="{{ data.state }}"
+            id="state"
+            name="state"
+            required
+          >
+
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label for="pincode" class="form-label">
+            Pincode
+          </label>
+
+          <input
+            type="text"
+            pattern="[0-9]{6}"
+            class="form-control"
+            value="{{ data.pincode }}"
+            id="pincode"
+            name="pincode"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Profile Photo -->
+      <div class="edit-section">
+        <span class="edit-section-icon">
+          <i class="bi bi-camera"></i>
+        </span>
+        Profile Photo
+      </div>
+
+
+      <div class="row g-3 align-items-center">
+
+        <div class="col-md-4">
+
+          <label for="photo" class="form-label">
+            Current Photo
+          </label>
+
+          <div>
+            <img
+              src="{{ data.Upload_photo }}"
+              class="current-photo"
+              alt="Current profile photo"
+            >
+          </div>
+
+        </div>
+
+
+        <div class="col-md-8">
+
+          <label for="photo" class="form-label">
+            Upload New Photo
+          </label>
+
+          <div class="photo-upload-box">
+
+            <input
+              type="file"
+              class="form-control"
+              name="upload_photo"
+              id="photo"
+              accept="image/*"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Actions -->
+      <div class="edit-actions">
+
+
+
+        <button
+          type="submit"
+          class="btn btn-save"
+        >
+          <i class="bi bi-check2-circle me-1"></i>
+          Save Changes
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</div>
+
+{% endblock %}

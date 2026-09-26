@@ -1,0 +1,809 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">Emergency vaccine view</h2>#}
+{##}
+{#      <div class="row">#}
+{# {% for i in data %}#}
+{##}
+{#          <div class="col-lg-3">#}
+{##}
+{##}
+{#              <div class="card" style="width: 18rem;">#}
+{#  <div class="card-body">#}
+{#    <h5 class="card-title">{{ i.Vaccinename }}</h5>#}
+{#    <h6 class="card-subtitle mb-2 text-body-secondary">{{ i.Manufacture }}</h6>#}
+{#    <p class="card-text">#}
+{#        Age group:{{ i.Age }}<br>#}
+{#        Dose number:{{ i.Dose_number }}<br>#}
+{#        Discription:{{ i.Description }}<br>#}
+{#        Side effect:{{ i.Side_effect }}<br>#}
+{#        Emergency:{{ i.Emergency_type }}<br>#}
+{#    </p>#}
+{#    <a href="/myapp/U_view_hospital_vaccine_get/{{ i.id }}" class="card-link">Hospital</a>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#          </div>#}
+{#      {% endfor %}#}
+{##}
+{#      </div>#}
+{##}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>SLN/th>#}
+{#          <th>vaccine Name</th>#}
+{#          <th>Age group</th>#}
+{#          <th>Dose number</th>#}
+{#          <th>Discription</th>#}
+{#          <th>Side effect</th>#}
+{#          <th>Manufactering  company</th>#}
+{#          <th>Emergency</th>#}
+{#          <th></th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.Vaccinename }}</td>#}
+{#          <td>{{ i.Age }}</td>#}
+{#          <td>{{ i.Dose_number }}</td>#}
+{#          <td>{{ i.Description }}</td>#}
+{#          <td>{{ i.Side_effect }}</td>#}
+{#          <td>{{ i.Manufacture }}</td>#}
+{#          <td>{{ i.Emergency_type }}</td>#}
+{##}
+{#          <td><a href="/myapp/adm_edit_vaccine_info_get/{{ i.id }}">Edit</a> <br>#}
+{#          <a href="/myapp/adm_delete_vaccine_info/{{ i.id }}">Delete</a> </td>#}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#  <title>VaxiCare — Emergency Vaccine</title>#}
+{#  <link rel="preconnect" href="https://fonts.googleapis.com">#}
+{#  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">#}
+{#  <style>#}
+{#    :root {#}
+{#      --bg: #F5FBFD;#}
+{#      --primary: #2C97D6;#}
+{#      --primary-deep: #1B6FA8;#}
+{#      --teal: #22C6A8;#}
+{#      --navy: #10263A;#}
+{#      --navy-soft: #5A7284;#}
+{#      --mist: #EAF6FB;#}
+{#      --border: #DBEEF6;#}
+{#      --white: #FFFFFF;#}
+{#      --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);#}
+{#      --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);#}
+{#    }#}
+{#    * { box-sizing: border-box; }#}
+{#    html, body { margin: 0; padding: 0; }#}
+{#    body {#}
+{#      font-family: 'Inter', sans-serif;#}
+{#      color: var(--navy);#}
+{#      min-height: 100vh;#}
+{#      -webkit-font-smoothing: antialiased;#}
+{#      background:#}
+{#        radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),#}
+{#        radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),#}
+{#        var(--bg);#}
+{#    }#}
+{#    a { text-decoration: none; color: inherit; }#}
+{##}
+{#    .nav {#}
+{#      display: flex;#}
+{#      align-items: center;#}
+{#      justify-content: space-between;#}
+{#      padding: 16px 40px;#}
+{#      position: sticky;#}
+{#      top: 0;#}
+{#      z-index: 20;#}
+{#      background: rgba(245, 251, 253, .75);#}
+{#      backdrop-filter: blur(10px);#}
+{#      border-bottom: 1px solid var(--border);#}
+{#    }#}
+{#    .brand { display: flex; align-items: center; gap: 9px; }#}
+{#    .brand-mark { width: 28px; height: 28px; display: block; }#}
+{#    .brand-name {#}
+{#      font-family: 'Sora', sans-serif;#}
+{#      font-weight: 700;#}
+{#      font-size: 16.5px;#}
+{#      letter-spacing: -.01em;#}
+{#    }#}
+{#    .brand-name span { color: var(--primary); }#}
+{#    .nav-links {#}
+{#      display: flex;#}
+{#      gap: 28px;#}
+{#      font-size: 13.5px;#}
+{#      font-weight: 500;#}
+{#      color: var(--navy-soft);#}
+{#    }#}
+{#    .avatar-nav {#}
+{#      width: 32px;#}
+{#      height: 32px;#}
+{#      border-radius: 50%;#}
+{#      background: linear-gradient(135deg, var(--primary), var(--teal));#}
+{#      display: grid;#}
+{#      place-items: center;#}
+{#      color: #fff;#}
+{#      font-family: 'Sora', sans-serif;#}
+{#      font-weight: 600;#}
+{#      font-size: 11.5px;#}
+{#      box-shadow: var(--shadow-sm);#}
+{#    }#}
+{##}
+{#    .stage {#}
+{#      max-width: 1120px;#}
+{#      margin: 0 auto;#}
+{#      padding: 36px 24px 64px;#}
+{#    }#}
+{#    .breadcrumb {#}
+{#      font-size: 12.5px;#}
+{#      color: var(--navy-soft);#}
+{#      margin-bottom: 14px;#}
+{#    }#}
+{#    .breadcrumb b { color: var(--navy); font-weight: 600; }#}
+{##}
+{#    .header-block { margin-bottom: 24px; }#}
+{#    .header-block .eyebrow {#}
+{#      font-size: 11px;#}
+{#      font-weight: 600;#}
+{#      color: var(--teal);#}
+{#      letter-spacing: .06em;#}
+{#      text-transform: uppercase;#}
+{#    }#}
+{#    .header-block h1 {#}
+{#      font-family: 'Sora', sans-serif;#}
+{#      font-weight: 700;#}
+{#      font-size: 22px;#}
+{#      margin: 6px 0 4px;#}
+{#      color: var(--navy);#}
+{#    }#}
+{#    .header-block p {#}
+{#      margin: 0;#}
+{#      font-size: 13px;#}
+{#      color: var(--navy-soft);#}
+{#      line-height: 1.45;#}
+{#    }#}
+{##}
+{#    .vaccine-grid {#}
+{#      display: grid;#}
+{#      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));#}
+{#      gap: 18px;#}
+{#    }#}
+{##}
+{#    .vax-card {#}
+{#      background: var(--white);#}
+{#      border-radius: 18px;#}
+{#      border: 1px solid var(--border);#}
+{#      box-shadow: var(--shadow-sm);#}
+{#      overflow: hidden;#}
+{#      transition: transform .2s ease, box-shadow .2s ease;#}
+{#      display: flex;#}
+{#      flex-direction: column;#}
+{#    }#}
+{#    .vax-card:hover {#}
+{#      transform: translateY(-3px);#}
+{#      box-shadow: var(--shadow-md);#}
+{#    }#}
+{##}
+{#    .vax-card-top {#}
+{#      background: linear-gradient(160deg, #2C97D6 0%, #1B6FA8 55%, #17A88F 130%);#}
+{#      padding: 18px 18px 16px;#}
+{#      color: #fff;#}
+{#      position: relative;#}
+{#      overflow: hidden;#}
+{#    }#}
+{#    .vax-card-top::before {#}
+{#      content: "";#}
+{#      position: absolute;#}
+{#      inset: 0;#}
+{#      background: radial-gradient(180px 120px at 10% 0%, rgba(255,255,255,.12), transparent 60%);#}
+{#    }#}
+{#    .vax-card-top .vax-label {#}
+{#      position: relative;#}
+{#      z-index: 1;#}
+{#      display: inline-flex;#}
+{#      align-items: center;#}
+{#      gap: 6px;#}
+{#      font-size: 10px;#}
+{#      font-weight: 600;#}
+{#      letter-spacing: .04em;#}
+{#      text-transform: uppercase;#}
+{#      background: rgba(255,255,255,.16);#}
+{#      border: 1px solid rgba(255,255,255,.28);#}
+{#      padding: 4px 10px;#}
+{#      border-radius: 999px;#}
+{#      margin-bottom: 10px;#}
+{#    }#}
+{#    .vax-card-top .vax-label .dot {#}
+{#      width: 5px;#}
+{#      height: 5px;#}
+{#      border-radius: 50%;#}
+{#      background: #8CF4D9;#}
+{#    }#}
+{#    .vax-card-top h3 {#}
+{#      position: relative;#}
+{#      z-index: 1;#}
+{#      font-family: 'Sora', sans-serif;#}
+{#      font-weight: 700;#}
+{#      font-size: 16px;#}
+{#      margin: 0 0 4px;#}
+{#      line-height: 1.3;#}
+{#    }#}
+{#    .vax-card-top .mfg {#}
+{#      position: relative;#}
+{#      z-index: 1;#}
+{#      font-size: 12px;#}
+{#      color: rgba(255,255,255,.82);#}
+{#      margin: 0;#}
+{#    }#}
+{##}
+{#    .vax-card-body {#}
+{#      padding: 16px 18px 18px;#}
+{#      flex: 1;#}
+{#      display: flex;#}
+{#      flex-direction: column;#}
+{#      gap: 10px;#}
+{#    }#}
+{#    .vax-row {#}
+{#      display: flex;#}
+{#      gap: 10px;#}
+{#      align-items: flex-start;#}
+{#      font-size: 12.5px;#}
+{#      line-height: 1.4;#}
+{#    }#}
+{#    .vax-row .label {#}
+{#      flex-shrink: 0;#}
+{#      width: 88px;#}
+{#      font-weight: 600;#}
+{#      color: var(--navy-soft);#}
+{#      font-size: 11.5px;#}
+{#      text-transform: uppercase;#}
+{#      letter-spacing: .03em;#}
+{#    }#}
+{#    .vax-row .value {#}
+{#      color: var(--navy);#}
+{#      font-weight: 500;#}
+{#      flex: 1;#}
+{#    }#}
+{#    .dose-pill {#}
+{#      display: inline-flex;#}
+{#      padding: 3px 9px;#}
+{#      border-radius: 999px;#}
+{#      font-size: 11.5px;#}
+{#      font-weight: 600;#}
+{#      background: rgba(44, 151, 214, 0.1);#}
+{#      color: var(--primary-deep);#}
+{#      border: 1px solid rgba(44, 151, 214, 0.22);#}
+{#    }#}
+{#    .type-tag {#}
+{#      display: inline-flex;#}
+{#      padding: 3px 9px;#}
+{#      border-radius: 6px;#}
+{#      font-size: 11.5px;#}
+{#      font-weight: 600;#}
+{#      background: rgba(34, 198, 168, 0.1);#}
+{#      color: #0d8a72;#}
+{#      border: 1px solid rgba(34, 198, 168, 0.25);#}
+{#    }#}
+{#    .age-tag {#}
+{#      display: inline-flex;#}
+{#      padding: 3px 9px;#}
+{#      border-radius: 6px;#}
+{#      font-size: 11.5px;#}
+{#      font-weight: 600;#}
+{#      background: var(--mist);#}
+{#      color: var(--primary-deep);#}
+{#      border: 1px solid var(--border);#}
+{#    }#}
+{##}
+{#    .empty-state {#}
+{#      grid-column: 1 / -1;#}
+{#      text-align: center;#}
+{#      padding: 48px 24px;#}
+{#      background: var(--white);#}
+{#      border-radius: 18px;#}
+{#      border: 1px solid var(--border);#}
+{#      box-shadow: var(--shadow-sm);#}
+{#      color: var(--navy-soft);#}
+{#      font-size: 14px;#}
+{#    }#}
+{##}
+{#    @media (max-width: 760px) {#}
+{#      .nav { padding: 14px 20px; }#}
+{#      .nav-links { display: none; }#}
+{#      .stage { padding: 24px 16px 48px; }#}
+{#      .header-block h1 { font-size: 19px; }#}
+{#      .vaccine-grid { grid-template-columns: 1fr; }#}
+{#    }#}
+{#  </style>#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{##}
+  {# Remove this nav if Hospitalindex.html already has one #}
+{##}
+{##}
+{#  <div class="stage">#}
+{#    <div class="breadcrumb">Vaccines &nbsp;/&nbsp; <b>Emergency vaccine</b></div>#}
+{##}
+{#    <div class="header-block">#}
+{#      <div class="eyebrow">Emergency · Vaccines</div>#}
+{#      <h1>Emergency vaccine view</h1>#}
+{#      <p>Vaccine name, manufacturer, dose, age group, and side effects for emergency use.</p>#}
+{#    </div>#}
+{##}
+{#    <div class="vaccine-grid">#}
+{#      {% for i in data %}#}
+{#      <article class="vax-card">#}
+{#        <div class="vax-card-top">#}
+{#          <span class="vax-label"><span class="dot"></span> Emergency</span>#}
+{#          <h3>{{ i.Vaccinename }}</h3>#}
+{#          <p class="mfg">{{ i.Manufacture }}</p>#}
+{#        </div>#}
+{#        <div class="vax-card-body">#}
+{#          <div class="vax-row">#}
+{#            <span class="label">Age group</span>#}
+{#            <span class="value"><span class="age-tag">{{ i.Age }}</span></span>#}
+{#          </div>#}
+{#          <div class="vax-row">#}
+{#            <span class="label">Dose</span>#}
+{#            <span class="value"><span class="dose-pill">Dose {{ i.Dose_number }}</span></span>#}
+{#          </div>#}
+{#          <div class="vax-row">#}
+{#            <span class="label">Description</span>#}
+{#            <span class="value">{{ i.Description }}</span>#}
+{#          </div>#}
+{#          <div class="vax-row">#}
+{#            <span class="label">Side effect</span>#}
+{#            <span class="value">{{ i.Side_effect }}</span>#}
+{#          </div>#}
+{##}
+{#        </div>#}
+{#      </article>#}
+{#      {% empty %}#}
+{#      <div class="empty-state">No emergency vaccines found.</div>#}
+{#      {% endfor %}#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaxiCare — Emergency Vaccine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5FBFD;
+      --primary: #2C97D6;
+      --primary-deep: #1B6FA8;
+      --teal: #22C6A8;
+      --navy: #10263A;
+      --navy-soft: #5A7284;
+      --mist: #EAF6FB;
+      --border: #DBEEF6;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);
+      --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+        var(--bg);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 251, 253, .75);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 9px; }
+    .brand-mark { width: 28px; height: 28px; display: block; }
+    .brand-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16.5px;
+      letter-spacing: -.01em;
+    }
+    .brand-name span { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy-soft);
+    }
+    .avatar-nav {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 11.5px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stage {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      margin-bottom: 14px;
+    }
+    .breadcrumb b { color: var(--navy); font-weight: 600; }
+
+    .header-block { margin-bottom: 24px; }
+    .header-block .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .header-block h1 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin: 6px 0 4px;
+      color: var(--navy);
+    }
+    .header-block p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--navy-soft);
+      line-height: 1.45;
+    }
+
+    .search-bar {
+      margin-bottom: 20px;
+    }
+    .search-shell {
+      position: relative;
+      max-width: 360px;
+    }
+    .search-shell svg {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      color: var(--navy-soft);
+      pointer-events: none;
+    }
+    .search-shell input {
+      width: 100%;
+      padding: 10px 13px 10px 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    .search-shell input::placeholder {
+      color: #A9BDCB;
+      font-weight: 400;
+    }
+    .search-shell input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3.5px rgba(44, 151, 214, .14);
+    }
+
+    .vaccine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .vax-card {
+      background: var(--white);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .vax-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .vax-card.is-hidden {
+      display: none;
+    }
+
+    .vax-card-top {
+      background: linear-gradient(160deg, #2C97D6 0%, #1B6FA8 55%, #17A88F 130%);
+      padding: 18px 18px 16px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .vax-card-top::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(180px 120px at 10% 0%, rgba(255,255,255,.12), transparent 60%);
+    }
+    .vax-card-top .vax-label {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.28);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .vax-card-top .vax-label .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #8CF4D9;
+    }
+    .vax-card-top h3 {
+      position: relative;
+      z-index: 1;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 0 4px;
+      line-height: 1.3;
+    }
+    .vax-card-top .mfg {
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+      margin: 0;
+    }
+
+    .vax-card-body {
+      padding: 16px 18px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .vax-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    .vax-row .label {
+      flex-shrink: 0;
+      width: 88px;
+      font-weight: 600;
+      color: var(--navy-soft);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .vax-row .value {
+      color: var(--navy);
+      font-weight: 500;
+      flex: 1;
+    }
+    .dose-pill {
+      display: inline-flex;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: rgba(44, 151, 214, 0.1);
+      color: var(--primary-deep);
+      border: 1px solid rgba(44, 151, 214, 0.22);
+    }
+    .type-tag {
+      display: inline-flex;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: rgba(34, 198, 168, 0.1);
+      color: #0d8a72;
+      border: 1px solid rgba(34, 198, 168, 0.25);
+    }
+    .age-tag {
+      display: inline-flex;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--mist);
+      color: var(--primary-deep);
+      border: 1px solid var(--border);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--white);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      color: var(--navy-soft);
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .stage { padding: 24px 16px 48px; }
+      .header-block h1 { font-size: 19px; }
+      .vaccine-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+{% extends 'Hospital/Hospitalindex.html' %}
+{% block body %}
+
+  {# Remove this nav if Hospitalindex.html already has one #}
+
+
+  <div class="stage">
+    <div class="breadcrumb">Vaccines &nbsp;/&nbsp; <b>Emergency vaccine</b></div>
+
+    <div class="header-block">
+      <div class="eyebrow">Emergency · Vaccines</div>
+      <h1>Emergency vaccine view</h1>
+      <p>Vaccine name, manufacturer, dose, age group, and side effects for emergency use.</p>
+    </div>
+
+    <div class="search-bar">
+      <div class="search-shell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M21 21l-4.3-4.3"/>
+        </svg>
+        <input type="text" id="vaxSearch" placeholder="Search by vaccine name or manufacturer">
+      </div>
+    </div>
+
+    <div class="vaccine-grid" id="vaxGrid">
+      {% for i in data %}
+      <article class="vax-card" data-name="{{ i.Vaccinename|lower }}" data-mfg="{{ i.Manufacture|lower }}">
+        <div class="vax-card-top">
+          <span class="vax-label"><span class="dot"></span> Emergency</span>
+          <h3>{{ i.Vaccinename }}</h3>
+          <p class="mfg">{{ i.Manufacture }}</p>
+        </div>
+        <div class="vax-card-body">
+          <div class="vax-row">
+            <span class="label">Age group</span>
+            <span class="value"><span class="age-tag">{{ i.Age }}</span></span>
+          </div>
+          <div class="vax-row">
+            <span class="label">Dose</span>
+            <span class="value"><span class="dose-pill">Dose {{ i.Dose_number }}</span></span>
+          </div>
+          <div class="vax-row">
+            <span class="label">Description</span>
+            <span class="value">{{ i.Description }}</span>
+          </div>
+          <div class="vax-row">
+            <span class="label">Side effect</span>
+            <span class="value">{{ i.Side_effect }}</span>
+          </div>
+
+        </div>
+      </article>
+      {% empty %}
+      <div class="empty-state">No emergency vaccines found.</div>
+      {% endfor %}
+    </div>
+
+    <div class="empty-state" id="noSearchResults" style="display:none;">No vaccines match your search.</div>
+  </div>
+
+  <script>
+    document.getElementById('vaxSearch').addEventListener('input', function () {
+      var query = this.value.trim().toLowerCase();
+      var cards = document.querySelectorAll('#vaxGrid .vax-card');
+      var visibleCount = 0;
+
+      cards.forEach(function (card) {
+        var name = card.getAttribute('data-name') || '';
+        var mfg = card.getAttribute('data-mfg') || '';
+        var matches = name.indexOf(query) !== -1 || mfg.indexOf(query) !== -1;
+        card.classList.toggle('is-hidden', !matches);
+        if (matches) visibleCount++;
+      });
+
+      document.getElementById('noSearchResults').style.display =
+        (visibleCount === 0 && cards.length > 0) ? 'block' : 'none';
+    });
+  </script>
+
+{% endblock %}
+</body>
+</html>

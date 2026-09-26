@@ -1,0 +1,286 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Vaccination information</h2>#}
+{##}
+{#      <div class="row">#}
+{# {% for i in data %}#}
+{##}
+{#          <div class="col-lg-3">#}
+{##}
+{##}
+{#              <div class="card" style="width: 18rem;">#}
+{#  <div class="card-body">#}
+{#    <h5 class="card-title">{{ i.Vaccinename }}</h5>#}
+{#    <h6 class="card-subtitle mb-2 text-body-secondary">{{ i.HOSPITAL.Hospitalname }}</h6>#}
+{#    <p class="card-text">#}
+{#        Age group:{{ i.VACCINATIONINFORMATION.Age }}<br>#}
+{#        Dose number:{{ i.VACCINATIONINFORMATION.Dose_number }}<br>#}
+{#        Discription:{{ i.VACCINATIONINFORMATION.Description }}<br>#}
+{#        Side effect:{{ i.VACCINATIONINFORMATION.Side_effect }}<br>#}
+{#        Emergency:{{ i.VACCINATIONINFORMATION.Emergency_type }}<br>#}
+{#        Slot date:{{ i.Date }}<br>#}
+{#        Slot time:{{ i.Fromtime }}<br>#}
+{# <form method="post" action="/myapp/book_vaccine/">#}
+{#  {% csrf_token %}#}
+{##}
+{#      <input type="hidden" name="id" value="{{ i.id }}">#}
+{#        <select class="form-select" name="cid">#}
+{#            <option value="own">My self</option>#}
+{##}
+{#            {% for i in child %}#}
+{#                <option value="{{ i.id }}">{{ i.Name }}</option>#}
+{##}
+{#                {% endfor %}#}
+{#        </select>#}
+{#  <button class="card-link">Confirm Booking</button>#}
+{#  </form>#}
+{#    </p>#}
+{#    <a href="/myapp/book_vaccine/{{ i.id }}" class="card-link">CONFIRM BOOKING</a>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#          </div>#}
+{#      {% endfor %}#}
+{##}
+{##}
+{##}
+{#      </div>#}
+{##}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>SLN/th>#}
+{#          <th>vaccine Name</th>#}
+{#          <th>Age group</th>#}
+{#          <th>Dose number</th>#}
+{#          <th>Discription</th>#}
+{#          <th>Side effect</th>#}
+{#          <th>Manufactering  company</th>#}
+{#          <th>Emergency</th>#}
+{#          <th></th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.Vaccinename }}</td>#}
+{#          <td>{{ i.Age }}</td>#}
+{#          <td>{{ i.Dose_number }}</td>#}
+{#          <td>{{ i.Description }}</td>#}
+{#          <td>{{ i.Side_effect }}</td>#}
+{#          <td>{{ i.Manufacture }}</td>#}
+{#          <td>{{ i.Emergency_type }}</td>#}
+{##}
+{#          <td><a href="/myapp/adm_edit_vaccine_info_get/{{ i.id }}">Edit</a> <br>#}
+{#          <a href="/myapp/adm_delete_vaccine_info/{{ i.id }}">Delete</a> </td>#}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{% extends 'User/Userindex.html' %}
+{% block body %}
+
+<style>
+  .vax-header {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+  }
+  .vax-header h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+  .vax-header p {
+    margin: 6px 0 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+  }
+
+  .vax-card {
+    background: #fff;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .vax-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.1);
+  }
+  .vax-card-body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .vax-title {
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 2px;
+  }
+  .vax-hospital {
+    font-size: 0.82rem;
+    color: #0284c7;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .vax-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  .vax-info-list li {
+    padding: 4px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .vax-info-list li span.label {
+    color: #888;
+    font-weight: 500;
+  }
+  .vax-info-list li:last-child {
+    border-bottom: none;
+  }
+  .vax-slot {
+    background: #f5f3ff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    color: #0284c7;
+  }
+  .vax-card-body form {
+    margin-top: auto;
+  }
+  .vax-card-body .form-select {
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+  .btn-book {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .btn-book:hover {
+    opacity: 0.9;
+    color: #fff;
+  }
+    .vax-info-title {
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 2px;
+  }
+  .vax-info-manufacturer {
+    font-size: 0.82rem;
+    color: #0284c7;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .vax-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+  }
+</style>
+
+<div class="container mt-4">
+
+  <div class="vax-header">
+    <h2>Confirm Vaccine Booking</h2>
+<p>Review the vaccination details and confirm your appointment</p>
+
+  </div>
+
+  <div class="row g-4">
+    {% for i in data %}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="vax-card">
+          <div class="vax-card-body">
+           <div class="vax-info-title">{{ i.VACCINATIONINFORMATION.Vaccinename }}</div>
+            <div class="vax-info-manufacturer">{{ i.VACCINATIONINFORMATION.Manufacture }}</div>
+            <div class="vax-title">{{ i.Vaccinename }}</div>
+
+
+            <ul class="vax-info-list">
+              <li><span class="label">Age group</span> {{ i.VACCINATIONINFORMATION.Age }}</li>
+              <li><span class="label">Dose number</span> {{ i.VACCINATIONINFORMATION.Dose_number }}</li>
+
+            </ul>
+             <div class="vax-hospital">{{ i.HOSPITAL.hospitalname }}</div>
+
+            <div class="vax-slot">
+              📅 {{ i.Date }} &nbsp;|&nbsp; ⏰ {{ i.Fromtime }}
+            </div>
+
+            <form method="post" action="/myapp/book_vaccine/">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{ i.id }}">
+              <select class="form-select" name="cid">
+                <option value="own">Myself</option>
+                {% for c in child %}
+                  <option value="{{ c.id }}">{{ c.Name }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn btn-book">Confirm Booking</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="vax-empty">
+        <h5>No vaccination slots available right now.</h5>
+        <p>Please check back later.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

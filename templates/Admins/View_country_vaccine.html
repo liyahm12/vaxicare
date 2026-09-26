@@ -1,0 +1,142 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Admins/Adminindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Country vaccine</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>slno</th>#}
+{#          <th>Vaccine Name</th>#}
+{#            <th>Destination country</th>#}
+{#          <th>Discription</th>#}
+{#          <th>Vaccine information</th>#}
+{#            <th></th>#}
+{#            <th></th>#}
+{##}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#      {% for i in data %}#}
+{#        <!-- Sample Data Row -->#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Vaccinename }}</td>#}
+{#          <td>{{ i.Destination_country }}</td>#}
+{#          <td>{{ i.Discription }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Description }}</td>#}
+{#                      <td><a href="/myapp/adm_Edit_country_vaccine_get/{{ i.id }}">Edit</a> <br>#}
+{#          <a href="/myapp/adm_delete_country_vaccine/{{ i.id }}">Delete</a> </td>#}
+{##}
+{##}
+{##}
+{##}
+{#        </tr>#}
+{#{% endfor %}#}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{% extends 'Admins/Adminindex.html' %}
+{% block body %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+<div class="container py-5">
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+    <div class="card-header text-white py-4 border-0"
+         style="background: linear-gradient(135deg, #87CEEB, #5BC0EB);">
+      <h3 class="mb-0"><i class="bi bi-globe-americas me-2"></i>Country Vaccine</h3>
+      <p class="mb-0 small opacity-75">Vaccine requirements by destination country</p>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table id="registrationTable" class="table table-striped table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Sl No</th>
+              <th>Vaccine Name</th>
+              <th>Destination Country</th>
+              <th>Description</th>
+              <th>Vaccine Information</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in data %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td class="fw-semibold">{{ i.VACCINATIONINFORMATION.Vaccinename }}</td>
+              <td><i class="bi bi-geo-alt text-info me-1"></i>{{ i.Destination_country }}</td>
+              <td>{{ i.Discription }}</td>
+              <td>{{ i.VACCINATIONINFORMATION.Description }}</td>
+              <td class="text-center">
+                <a href="/myapp/adm_Edit_country_vaccine_get/{{ i.id }}#t"
+                   class="btn btn-sm text-white rounded-3 me-1"
+                   style="background: linear-gradient(135deg, #87CEEB, #5BC0EB);"
+                   title="Edit">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a href="/myapp/adm_delete_country_vaccine/{{ i.id }}"
+                   class="btn btn-sm btn-outline-danger rounded-3"
+                   title="Delete"
+                   onclick="return confirm('Are you sure you want to delete this record?');">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <div class="mt-3">
+  {% for k in messages %}
+    <div class="alert
+      {% if k.tags == 'success' %}alert-success
+      {% elif k.tags == 'error' %}alert-danger
+      {% elif k.tags == 'warning' %}alert-warning
+      {% elif k.tags == 'info' %}alert-info
+      {% else %}alert-secondary{% endif %}
+      py-2 mb-2">
+      {{ k }}
+    </div>
+  {% endfor %}
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#registrationTable').DataTable();
+  });
+</script>
+{% endblock %}

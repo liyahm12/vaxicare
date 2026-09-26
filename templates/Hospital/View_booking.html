@@ -1,0 +1,817 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Country vaccine</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#         <tr>#}
+{#              <th>Sl No</th>#}
+{#              <th>Vaccine Name</th>#}
+{#              <th>Dose Number</th>#}
+{#              <th>Description</th>#}
+{#              <th>Side Effect</th>#}
+{#              <th>Emergency Type</th>#}
+{#              <th>Slot Date</th>#}
+{#              <th>Slot Time</th>#}
+{#              <th>User Details</th>#}
+{#              <th>Status</th>#}
+{#            </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data  %}#}
+{#        <tr>#}
+{#         <td>{{ forloop.counter }}</td>#}
+{#            <td>{{ i.SLOT.VACCINATIONINFORMATION.Vaccinename }}</td>#}
+{#          <td>{{ i.SLOT.VACCINATIONINFORMATION.Dose_number }}</td>#}
+{#            <td>{{ i.SLOT.VACCINATIONINFORMATION.Description}}</td>#}
+{#          <td>{{ i.SLOT.VACCINATIONINFORMATION.Side_effect }}</td>#}
+{#           <td>{{ i.Type }}</td>#}
+{#           <td>{{ i.SLOT.Date }}</td>#}
+{#           <td>{{ i.SLOT.Fromtime }}</td>#}
+{#           <td>{{ i.USER.name }}<br>{{ i.USER.email }}<br>{{ i.USER.phone }}</td>#}
+{#           <td>{{ i.status }}</td>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaxiCare — Booking View</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5FBFD;
+      --primary: #2C97D6;
+      --primary-deep: #1B6FA8;
+      --teal: #22C6A8;
+      --navy: #10263A;
+      --navy-soft: #5A7284;
+      --mist: #EAF6FB;
+      --border: #DBEEF6;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);
+      --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+        var(--bg);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 251, 253, .75);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 9px; }
+    .brand-mark { width: 28px; height: 28px; display: block; }
+    .brand-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16.5px;
+      letter-spacing: -.01em;
+    }
+    .brand-name span { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy-soft);
+    }
+    .avatar-nav {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 11.5px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stage {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      margin-bottom: 14px;
+    }
+    .breadcrumb b { color: var(--navy); font-weight: 600; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--white);
+    }
+
+    .preview-panel {
+      position: relative;
+      padding: 30px 26px;
+      color: #fff;
+      background: linear-gradient(160deg, #2C97D6 0%, #1B6FA8 55%, #17A88F 130%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .preview-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px 200px at 15% 10%, rgba(255, 255, 255, .14), transparent 60%);
+    }
+    .pv-eyebrow {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .28);
+      padding: 5px 11px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .pv-eyebrow .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #8CF4D9;
+    }
+    .pv-title {
+      position: relative;
+      z-index: 2;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.35;
+      margin: 14px 0 18px;
+    }
+    .ticket {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    .ticket-top {
+      padding: 18px 18px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .cal-icon {
+      width: 48px;
+      height: 52px;
+      border-radius: 10px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .cal-icon .cal-month {
+      background: linear-gradient(135deg, var(--teal), #1FB79B);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 0;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .cal-icon .cal-day {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--navy);
+    }
+    .ticket-info { flex: 1; }
+    .ticket-vaccine {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 14.5px;
+    }
+    .ticket-date {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.82);
+      margin-top: 2px;
+    }
+    .ticket-divider {
+      position: relative;
+      height: 0;
+      border-top: 2px dashed rgba(255, 255, 255, 0.3);
+    }
+    .ticket-divider::before,
+    .ticket-divider::after {
+      content: "";
+      position: absolute;
+      top: -9px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+    .ticket-divider::before { left: -27px; }
+    .ticket-divider::after { right: -27px; }
+    .ticket-bottom {
+      padding: 14px 18px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ticket-time {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .ticket-time svg {
+      width: 15px;
+      height: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .ticket-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .ticket-status svg { width: 10px; height: 10px; }
+    .pv-list {
+      position: relative;
+      z-index: 2;
+      margin-top: 18px;
+      list-style: none;
+      padding: 0;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.7;
+    }
+    .pv-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pv-list li svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+    .pv-note {
+      position: relative;
+      z-index: 2;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .form-panel {
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .form-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .form-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      margin: 7px 0 5px;
+    }
+    .form-desc {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    /* ---- date filter bar ---- */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .filter-field label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--navy-soft);
+      margin-bottom: 6px;
+    }
+    .filter-field input[type="date"] {
+      padding: 8px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--navy);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .filter-field input[type="date"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(44, 151, 214, .12);
+    }
+    .filter-clear {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--navy-soft);
+      background: var(--mist);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+    .filter-clear:hover {
+      background: #fff;
+      color: var(--navy);
+    }
+    .filter-clear svg { width: 13px; height: 13px; }
+
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    table#registrationTable {
+      width: 100% !important;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 12.5px;
+    }
+    #registrationTable thead th {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--navy-soft);
+      background: var(--mist);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 11px 10px;
+      white-space: nowrap;
+      text-align: left;
+    }
+    #registrationTable tbody td {
+      padding: 12px 10px;
+      vertical-align: middle;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--navy);
+      font-weight: 500;
+    }
+    #registrationTable tbody tr:last-child td { border-bottom: none; }
+    #registrationTable tbody tr:hover td {
+      background: rgba(234, 246, 251, 0.5);
+    }
+
+    .col-sl {
+      width: 48px;
+      text-align: center;
+      color: var(--navy-soft);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .vaccine-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .text-muted-cell {
+      color: var(--navy-soft);
+      font-weight: 400;
+      font-size: 12px;
+      max-width: 140px;
+      line-height: 1.35;
+    }
+    .dose-pill {
+      display: inline-flex;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(44, 151, 214, 0.1);
+      color: var(--primary-deep);
+      border: 1px solid rgba(44, 151, 214, 0.22);
+    }
+    .type-tag {
+      display: inline-flex;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(34, 198, 168, 0.1);
+      color: #0d8a72;
+      border: 1px solid rgba(34, 198, 168, 0.25);
+      white-space: nowrap;
+    }
+    .user-block { line-height: 1.35; min-width: 110px; }
+    .user-block .uname {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 12.5px;
+    }
+    .user-block .umeta {
+      font-size: 11px;
+      color: var(--navy-soft);
+      font-weight: 400;
+    }
+    .badge {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: capitalize;
+      background: var(--mist);
+      color: var(--primary-deep);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .badge.approved, .badge.active, .badge.open, .badge.completed, .badge.booked {
+      background: rgba(34, 198, 168, 0.12);
+      color: #0d8a72;
+      border-color: rgba(34, 198, 168, 0.3);
+    }
+    .badge.vaccinated {
+      background: #0d8a72;
+      color: #fff;
+      border-color: #0d8a72;
+    }
+    .badge.pending, .badge.review {
+      background: rgba(44, 151, 214, 0.12);
+      color: var(--primary-deep);
+      border-color: rgba(44, 151, 214, 0.28);
+    }
+    .badge.rejected, .badge.closed, .badge.cancelled {
+      background: rgba(229, 72, 77, 0.1);
+      color: #c53030;
+      border-color: rgba(229, 72, 77, 0.22);
+    }
+    .col-date, .col-time {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      font-size: 12px;
+      color: var(--navy-soft);
+      margin: 8px 0 2px;
+    }
+    .dataTables_wrapper .dataTables_filter input {
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      padding: 6px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      color: var(--navy);
+      outline: none;
+      margin-left: 6px;
+      min-width: 140px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .dataTables_wrapper .dataTables_filter input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(44, 151, 214, .12);
+    }
+    .dataTables_wrapper .dataTables_length select {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 6px;
+      font-size: 12px;
+      color: var(--navy);
+      outline: none;
+      margin: 0 4px;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+      border-radius: 8px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--white) !important;
+      color: var(--navy) !important;
+      margin: 0 2px;
+      padding: 3px 9px !important;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep)) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.current) {
+      background: var(--mist) !important;
+      color: var(--navy) !important;
+    }
+    .dataTables_wrapper .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin: 0;
+    }
+    .dataTables_wrapper .col-sm-12,
+    .dataTables_wrapper .col-md-6 {
+      padding: 0;
+      width: auto;
+      flex: 1 1 auto;
+    }
+    table.dataTable.no-footer { border-bottom: none; }
+    .dataTables_empty {
+      padding: 28px 12px !important;
+      text-align: center;
+      color: var(--navy-soft);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav { padding: 14px 20px; }
+      .form-panel { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+{% extends 'Hospital/Hospitalindex.html' %}
+{% block body %}
+
+
+
+  <div class="stage">
+    <div class="breadcrumb">Bookings &nbsp;/&nbsp; <b>View by hospital</b></div>
+
+
+      <!-- Left preview panel -->
+
+      <!-- Right: table -->
+      <div class="form-panel">
+        <span class="form-eyebrow">Hospital · Bookings</span>
+        <h2 class="form-title">Booking view by hospital</h2>
+        <p class="form-desc">Vaccine, dose, emergency type, slot timing, patient details, and status.</p>
+
+        <div class="filter-bar">
+          <div class="filter-field">
+            <label for="dateFrom">Slot date from</label>
+            <input type="date" id="dateFrom">
+          </div>
+          <div class="filter-field">
+            <label for="dateTo">Slot date to</label>
+            <input type="date" id="dateTo">
+          </div>
+          <button type="button" class="filter-clear" id="clearDateFilter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Clear
+          </button>
+        </div>
+
+        <div class="table-scroll">
+          <table id="registrationTable" class="display" style="width:100%">
+            <thead>
+              <tr>
+                <th class="col-sl">Sl No</th>
+                <th>Vaccine name</th>
+                <th>Dose number</th>
+                <th>Description</th>
+
+                <th>Slot date</th>
+                <th>Slot time</th>
+                <th>User details</th>
+                <th>Status</th>
+                  <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+              <tr>
+                <td class="col-sl">{{ forloop.counter }}</td>
+                <td><span class="vaccine-name">{{ i.SLOT.VACCINATIONINFORMATION.Vaccinename }}</span></td>
+                <td><span class="dose-pill">Dose {{ i.SLOT.VACCINATIONINFORMATION.Dose_number }}</span></td>
+                <td><div class="text-muted-cell">{{ i.SLOT.VACCINATIONINFORMATION.Description }}</div></td>
+
+                <td class="col-date" data-date="{{ i.SLOT.Date|date:'Y-m-d' }}">{{ i.SLOT.Date }}</td>
+                <td class="col-time">{{ i.SLOT.Fromtime }}</td>
+                <td>
+                  <div class="user-block">
+                    <div class="uname">{{ i.USER.name }}</div>
+                    <div class="umeta">{{ i.USER.email }}</div>
+                    <div class="umeta">{{ i.USER.phone }}</div>
+                  </div>
+                </td>
+                <td><span class="badge {{ i.status|lower }}">{{ i.status }}</span></td>
+<td>
+    {% if i.status == "booked" %}
+
+        <a href="/myapp/h_confirm_vaccination/{{ i.id }}#t"
+           class="btn btn-dark btn-sm px-2 py-1"
+           style="font-size: 11px;">
+            <i class="bi bi-check-circle"></i>
+            Confirm Vaccination
+        </a>
+
+    {% else %}
+
+      <span class="badge bg-success"
+              style="font-size: 12px; padding: 5px 9px;">
+            <i class="bi bi-check-circle"
+               style="font-size: 15px;"></i>
+        </span>
+
+    {% endif %}
+</td>
+
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8" class="dataTables_empty">No bookings found for this hospital.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  </div>
+
+  <script>
+    // Load our own jQuery + DataTables LAST, after everything else on the page
+    // (including any jQuery the base template already loads), so nothing
+    // overwrites $.fn.DataTable before we use it.
+    (function () {
+      function loadScript(src, callback) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.onload = callback;
+        s.onerror = function () { console.error('Failed to load', src); };
+        document.body.appendChild(s);
+      }
+
+      function init() {
+        var jq = window.jQuery;
+        var $table = jq('#registrationTable');
+
+        if ($table.find('tbody tr td[colspan]').length === 0) {
+          if (jq.fn.DataTable.isDataTable('#registrationTable')) {
+            $table.DataTable().destroy();
+          }
+
+          var table = $table.DataTable({
+            language: {
+              search: "Search",
+              lengthMenu: "_MENU_",
+              info: "_START_–_END_ of _TOTAL_",
+              infoEmpty: "No bookings",
+              zeroRecords: "No matching bookings",
+              paginate: { previous: "Prev", next: "Next" }
+            },
+            pageLength: 8,
+            order: [[0, 'asc']],
+            scrollX: true
+          });
+
+          // Custom filter: slot date range, reading the ISO date from data-date on column 4
+          jq.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            if (settings.nTable.id !== 'registrationTable') return true;
+
+            var from = document.getElementById('dateFrom').value;
+            var to = document.getElementById('dateTo').value;
+            if (!from && !to) return true;
+
+            var row = table.row(dataIndex).node();
+            var slotDate = jq(row).find('td').eq(4).data('date');
+            if (!slotDate) return false;
+
+            if (from && slotDate < from) return false;
+            if (to && slotDate > to) return false;
+            return true;
+          });
+
+          jq('#dateFrom, #dateTo').on('change', function () {
+            table.draw();
+          });
+
+          jq('#clearDateFilter').on('click', function () {
+            jq('#dateFrom, #dateTo').val('');
+            table.draw();
+          });
+        }
+      }
+
+      window.addEventListener('load', function () {
+        loadScript('https://code.jquery.com/jquery-3.7.0.min.js', function () {
+          loadScript('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js', function () {
+            loadScript('https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js', init);
+          });
+        });
+      });
+    })();
+  </script>
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,375 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Public/Publichome.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Country vaccine</h2>#}
+{#    <table id="" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>SLNO</th>#}
+{##}
+{#            <th>Destination country</th>#}
+{#          <th>Discription</th>#}
+{#            <th>vaccine Name</th>#}
+{#            <th>Age </th>#}
+{#            <th>Dose number</th>#}
+{#            <th>Vaccine Description </th>#}
+{#            <th>Side effect</th>#}
+{#            <th>Manufacture</th>#}
+{#            <th>Emergency type</th>#}
+{##}
+{##}
+{##}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data  %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.Destination_country }}</td>#}
+{#          <td>{{ i.Discription }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Vaccinename }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Age }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Dose_number }}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Description}}</td>#}
+{#          <td>{{ i.VACCINATIONINFORMATION.Side_effect }}</td>#}
+{#            <td>{{ i.VACCINATIONINFORMATION.Manufacture}}</td>#}
+{#           <td>{{ i.VACCINATIONINFORMATION.Emergency_type }}</td>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+
+
+{% extends 'Public/Publichome.html' %}
+{% block body %}
+
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5FBFD;
+    --primary: #2C97D6;
+    --primary-deep: #1B6FA8;
+    --teal: #22C6A8;
+    --navy: #10263A;
+    --navy-soft: #5A7284;
+    --mist: #EAF6FB;
+    --border: #DBEEF6;
+    --white: #FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);
+    --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+      var(--bg);
+  }
+  a { text-decoration: none; color: inherit; }
+
+  .stage { max-width: 1200px; margin: 0 auto; padding: 36px 24px 64px; }
+  .breadcrumb { font-size: 12.5px; color: var(--navy-soft); margin-bottom: 14px; }
+  .breadcrumb b { color: var(--navy); font-weight: 600; }
+
+  .header-block { margin-bottom: 22px; }
+  .header-block .eyebrow {
+    font-size: 11px; font-weight: 600; color: var(--teal);
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .header-block h1 {
+    font-family: 'Sora', sans-serif; font-weight: 700; font-size: 22px;
+    margin: 6px 0 4px; color: var(--navy);
+  }
+  .header-block p { margin: 0; font-size: 13px; color: var(--navy-soft); line-height: 1.45; }
+
+  /* filter toolbar */
+  .toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .filter-shell { position: relative; }
+  .filter-shell svg {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; color: var(--navy-soft); pointer-events: none;
+  }
+  #countryFilter {
+    appearance: none; -webkit-appearance: none;
+    background: var(--white);
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 9px 34px 9px 34px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--navy);
+    outline: none; cursor: pointer; min-width: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A7284' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  #countryFilter:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(44,151,214,.12); }
+
+  .main-card {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .main-card-inner { padding: 22px 24px 24px; }
+
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table#registrationTable {
+    width: 100% !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+  }
+  #registrationTable thead th {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--navy-soft);
+    background: var(--mist);
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 12px;
+    white-space: nowrap;
+    text-align: left;
+  }
+  #registrationTable tbody td {
+    padding: 14px 12px;
+    vertical-align: middle;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--navy);
+    font-weight: 500;
+  }
+  #registrationTable tbody tr:last-child td { border-bottom: none; }
+  #registrationTable tbody tr:hover td { background: rgba(234, 246, 251, 0.5); }
+
+  .col-sl {
+    width: 52px; text-align: center; color: var(--navy-soft);
+    font-weight: 600; font-variant-numeric: tabular-nums;
+  }
+  .country-name { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 13.5px; color: var(--navy); }
+  .vaccine-name { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 13px; color: var(--navy); }
+  .text-muted-cell { color: var(--navy-soft); font-weight: 400; font-size: 12.5px; max-width: 150px; line-height: 1.4; }
+  .dose-pill {
+    display: inline-flex; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
+    background: rgba(44, 151, 214, 0.1); color: var(--primary-deep); border: 1px solid rgba(44, 151, 214, 0.22);
+  }
+  .age-tag {
+    display: inline-flex; padding: 3px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600;
+    background: var(--mist); color: var(--primary-deep); border: 1px solid var(--border);
+  }
+  .type-tag {
+    display: inline-flex; padding: 3px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 600;
+    background: rgba(34, 198, 168, 0.1); color: #0d8a72; border: 1px solid rgba(34, 198, 168, 0.25);
+    white-space: nowrap;
+  }
+
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter,
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_paginate {
+    font-size: 12.5px; color: var(--navy-soft); margin: 10px 0 4px;
+  }
+  .dataTables_wrapper .dataTables_filter input {
+    border: 1.5px solid var(--border); border-radius: 9px; padding: 7px 12px;
+    font-family: 'Inter', sans-serif; font-size: 13px; color: var(--navy); outline: none;
+    margin-left: 6px; min-width: 180px; transition: border-color .2s, box-shadow .2s;
+  }
+  .dataTables_wrapper .dataTables_filter input:focus {
+    border-color: var(--primary); box-shadow: 0 0 0 3px rgba(44, 151, 214, .12);
+  }
+  .dataTables_wrapper .dataTables_length select {
+    border: 1.5px solid var(--border); border-radius: 8px; padding: 5px 8px;
+    font-size: 12.5px; color: var(--navy); outline: none; margin: 0 4px;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 8px !important; border: 1px solid var(--border) !important;
+    background: var(--white) !important; color: var(--navy) !important;
+    margin: 0 2px; padding: 4px 10px !important; font-weight: 500; font-size: 12.5px;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: linear-gradient(135deg, var(--primary), var(--primary-deep)) !important;
+    color: #fff !important; border-color: transparent !important;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.current) {
+    background: var(--mist) !important; color: var(--navy) !important;
+  }
+  .dataTables_wrapper .row {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 0;
+  }
+  .dataTables_wrapper .col-sm-12,
+  .dataTables_wrapper .col-md-6 { padding: 0; width: auto; flex: 1 1 auto; }
+  table.dataTable.no-footer { border-bottom: none; }
+  .dataTables_empty { padding: 32px 16px !important; text-align: center; color: var(--navy-soft); font-size: 13.5px; }
+
+  @media (max-width: 760px) {
+    .stage { padding: 24px 16px 48px; }
+    .header-block h1 { font-size: 19px; }
+    .main-card-inner { padding: 16px 14px 18px; }
+    #countryFilter { min-width: 100%; }
+  }
+</style>
+
+  <div class="stage">
+    <div class="breadcrumb"><b>Country vaccine</b></div>
+
+    <div class="header-block">
+      <div class="eyebrow">Travel · Vaccines</div>
+      <h1>View country vaccine</h1>
+      <p>Destination country, required vaccines, dose, age group, and safety information.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="filter-shell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+        <select id="countryFilter">
+          <option value="">All countries</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="main-card">
+      <div class="main-card-inner">
+        <div class="table-scroll">
+          <table id="registrationTable" class="display" style="width:100%">
+            <thead>
+              <tr>
+                <th class="col-sl">Sl No</th>
+                <th>Dest. Country</th>
+                <th>Description</th>
+                <th>Vaccine name</th>
+                <th>Age</th>
+                <th>Dose number</th>
+                <th>Vaccine description</th>
+                <th>Side effect</th>
+                <th>Manufacturer</th>
+                <th>Emergency </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+              <tr>
+                <td class="col-sl">{{ forloop.counter }}</td>
+                <td><span class="country-name">{{ i.Destination_country }}</span></td>
+                <td><div class="text-muted-cell">{{ i.Discription }}</div></td>
+                <td><span class="vaccine-name">{{ i.VACCINATIONINFORMATION.Vaccinename }}</span></td>
+                <td><span class="age-tag">{{ i.VACCINATIONINFORMATION.Age }}</span></td>
+                <td><span class="dose-pill">Dose {{ i.VACCINATIONINFORMATION.Dose_number }}</span></td>
+                <td><div class="text-muted-cell">{{ i.VACCINATIONINFORMATION.Description }}</div></td>
+                <td><div class="text-muted-cell">{{ i.VACCINATIONINFORMATION.Side_effect }}</div></td>
+                <td>{{ i.VACCINATIONINFORMATION.Manufacture }}</td>
+                <td><span class="type-tag">{{ i.VACCINATIONINFORMATION.Emergency_type }}</span></td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="10" class="dataTables_empty">No country vaccine records found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var $table = $('#registrationTable');
+    if ($table.find('tbody tr td[colspan]').length === 0) {
+
+      var table = $table.DataTable({
+        language: {
+          search: "Search",
+          lengthMenu: "_MENU_ per page",
+          info: "Showing _START_–_END_ of _TOTAL_",
+          infoEmpty: "No records",
+          zeroRecords: "No matching records",
+          paginate: { previous: "Prev", next: "Next" }
+        },
+        paging: true,
+        searching: true,
+        info: true,
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        pageLength: 10,
+        order: [[0, 'asc']],
+        scrollX: true
+      });
+
+      // Build the "available country" dropdown from the actual column-1 values
+      var countryCol = table.column(1);
+      var uniqueCountries = countryCol
+        .data()
+        .unique()
+        .sort()
+        .map(function (html) {
+          // strip the <span class="country-name">...</span> wrapper to get plain text
+          return $('<div>').html(html).text().trim();
+        })
+        .toArray()
+        .filter(function (val, idx, arr) {
+          return val && arr.indexOf(val) === idx; // dedupe after stripping tags
+        });
+
+      var $filter = $('#countryFilter');
+      uniqueCountries.each ? null : null; // no-op guard (array, not DT api, below is fine)
+      uniqueCountries.forEach(function (country) {
+        $filter.append('<option value="' + country.replace(/"/g, '&quot;') + '">' + country + '</option>');
+      });
+
+      $filter.on('change', function () {
+        var val = $.fn.dataTable.util.escapeRegex(this.value);
+        countryCol.search(val ? '^' + val + '$' : '', true, false).draw();
+      });
+    }
+  });
+</script>
+
+{% endblock %}
+</body>
+</html>

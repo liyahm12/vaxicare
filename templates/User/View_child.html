@@ -1,0 +1,497 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Child</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>#</th>#}
+{#          <th> Name</th>#}
+{#          <th>Gender</th>#}
+{#          <th>Dob</th>#}
+{#          <th>Blood group</th>#}
+{#          <th>Relation</th>#}
+{##}
+{#          <th></th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.Name }}</td>#}
+{#          <td>{{ i.gender }}</td>#}
+{#          <td>{{ i.Dob }}</td>#}
+{#          <td>{{ i.blood_group }}</td>#}
+{#          <td>{{ i.relation }}</td>#}
+{##}
+{#          <td><a href="/myapp/U_edit_child_info_get/{{ i.id }}">Edit</a> <br>#}
+{#          <a href="/myapp/delete_child_info/{{ i.id }}">Delete</a> </td>#}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{##}
+{#<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{##}
+{#<style>#}
+{#  .child-list-wrapper {#}
+{#    padding: 20px 16px 40px;#}
+{#  }#}
+{#  .child-list-header {#}
+{#    background: linear-gradient(135deg, #4e73df, #6f42c1);#}
+{#    color: #fff;#}
+{#    padding: 28px 32px;#}
+{#    border-radius: 16px;#}
+{#    margin-bottom: 28px;#}
+{#  }#}
+{#  .child-list-header h2 {#}
+{#    margin: 0;#}
+{#    font-weight: 600;#}
+{#  }#}
+{#  .child-list-header p {#}
+{#    margin: 6px 0 0;#}
+{#    opacity: 0.85;#}
+{#    font-size: 0.9rem;#}
+{#  }#}
+{#  .child-table-card {#}
+{#    background: #fff;#}
+{#    border-radius: 14px;#}
+{#    box-shadow: 0 4px 18px rgba(0,0,0,0.07);#}
+{#    padding: 24px;#}
+{#  }#}
+{#  #registrationTable thead th {#}
+{#    background: #f5f3ff;#}
+{#    color: #4e3d8f;#}
+{#    font-size: 0.8rem;#}
+{#    text-transform: uppercase;#}
+{#    letter-spacing: 0.03em;#}
+{#    border-bottom: none;#}
+{#    white-space: nowrap;#}
+{#  }#}
+{#  #registrationTable tbody td {#}
+{#    font-size: 0.88rem;#}
+{#    vertical-align: middle;#}
+{#    color: #444;#}
+{#  }#}
+{#  .gender-badge {#}
+{#    padding: 3px 12px;#}
+{#    border-radius: 30px;#}
+{#    font-size: 0.78rem;#}
+{#    font-weight: 500;#}
+{#  }#}
+{#  .gender-male {#}
+{#    background: #eef1fd;#}
+{#    color: #4e73df;#}
+{#  }#}
+{#  .gender-female {#}
+{#    background: #fdeef7;#}
+{#    color: #c2337a;#}
+{#  }#}
+{#  .blood-badge {#}
+{#    background: #fdecea;#}
+{#    color: #d93025;#}
+{#    padding: 3px 10px;#}
+{#    border-radius: 6px;#}
+{#    font-size: 0.78rem;#}
+{#    font-weight: 600;#}
+{#  }#}
+{#  .action-links a {#}
+{#    text-decoration: none;#}
+{#    font-size: 0.82rem;#}
+{#    font-weight: 500;#}
+{#    margin-right: 10px;#}
+{#  }#}
+{#  .action-links .edit-link {#}
+{#    color: #4e73df;#}
+{#  }#}
+{#  .action-links .delete-link {#}
+{#    color: #d93025;#}
+{#  }#}
+{#  .action-links a:hover {#}
+{#    text-decoration: underline;#}
+{#  }#}
+{#</style>#}
+{##}
+{#<div class="child-list-wrapper">#}
+{##}
+{#  <div class="child-list-header">#}
+{#    <h2>Your Children</h2>#}
+{#    <p>Manage the child profiles linked to your account</p>#}
+{#  </div>#}
+{##}
+{#  <div class="child-table-card">#}
+{#    <div class="table-responsive">#}
+{#      <table id="registrationTable" class="table table-striped table-bordered">#}
+{#        <thead>#}
+{#          <tr>#}
+{#            <th>#</th>#}
+{#            <th>Name</th>#}
+{#            <th>Gender</th>#}
+{#            <th>DOB</th>#}
+{#            <th>Blood Group</th>#}
+{#            <th>Relation</th>#}
+{#            <th>Actions</th>#}
+{#          </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#          {% for i in data %}#}
+{#          <tr>#}
+{#            <td>{{ forloop.counter }}</td>#}
+{#            <td>{{ i.Name }}</td>#}
+{#            <td>#}
+{#              {% if i.gender == "Male" %}#}
+{#                <span class="gender-badge gender-male">Male</span>#}
+{#              {% else %}#}
+{#                <span class="gender-badge gender-female">Female</span>#}
+{#              {% endif %}#}
+{#            </td>#}
+{#            <td>{{ i.Dob }}</td>#}
+{#            <td><span class="blood-badge">{{ i.blood_group }}</span></td>#}
+{#            <td>{{ i.relation }}</td>#}
+{#            <td class="action-links">#}
+{#              <a href="/myapp/U_edit_child_info_get/{{ i.id }}" class="edit-link">Edit</a>#}
+{#              <a href="/myapp/delete_child_info/{{ i.id }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>#}
+{#            </td>#}
+{#          </tr>#}
+{#          {% endfor %}#}
+{#        </tbody>#}
+{#      </table>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#</div>#}
+{##}
+{#<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#<script>#}
+{#  $(document).ready(function () {#}
+{#    $('#registrationTable').DataTable();#}
+{#  });#}
+{#</script>#}
+{##}
+{#{% endblock %}#}
+
+
+{% extends 'User/Userindex.html' %}
+{% block body %}
+
+<style>
+  .child-list-wrapper {
+    padding: 20px 16px 40px;
+  }
+  .child-list-header {
+    background: linear-gradient(135deg, #2C97D6, #22C6A8);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+  }
+  .child-list-header h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+  .child-list-header p {
+    margin: 6px 0 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+  }
+
+  .child-search-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+  }
+  .child-search-row input {
+    width: 100%;
+    max-width: 280px;
+    padding: 10px 14px 10px 38px;
+    font-size: 0.88rem;
+    color: #10263A;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7284' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M21 21l-4.3-4.3'/%3E%3C/svg%3E") no-repeat 12px center;
+    border: 1.5px solid #DBEEF6;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .child-search-row input:focus {
+    border-color: #2C97D6;
+    box-shadow: 0 0 0 3px rgba(44, 151, 214, .14);
+  }
+
+  .child-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .child-card {
+    background: #fff;
+    border: 1px solid #DBEEF6;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(44, 151, 214, 0.08);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .child-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(44, 151, 214, 0.14);
+  }
+
+  .child-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .child-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2C97D6, #22C6A8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .child-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #10263A;
+  }
+  .child-sl {
+    font-size: 0.72rem;
+    color: #5A7284;
+  }
+
+  .child-card-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+  }
+
+  .gender-badge {
+    padding: 3px 12px;
+    border-radius: 30px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .gender-male {
+    background: #EAF6FB;
+    color: #2C97D6;
+  }
+  .gender-female {
+    background: #fdeef7;
+    color: #c2337a;
+  }
+  .no-child-message {
+    width: 100%;
+    text-align: center;
+    padding: 50px 20px;
+    color: #6c757d;
+}
+
+.no-child-message i {
+    font-size: 45px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.no-child-message h5 {
+    margin-bottom: 8px;
+    color: #343a40;
+}
+
+.no-child-message p {
+    margin: 0;
+}
+  .blood-badge {
+    background: #fdecea;
+    color: #d93025;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .dob-badge, .relation-badge {
+    background: #EAF6FB;
+    color: #1B6FA8;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .child-card-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #EAF6FB;
+  }
+  .action-links a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .action-links .edit-link {
+    color: #1B6FA8;
+    background: rgba(44, 151, 214, 0.1);
+    border: 1px solid rgba(44, 151, 214, 0.28);
+  }
+  .action-links .edit-link:hover {
+    background: rgba(44, 151, 214, 0.18);
+    transform: translateY(-1px);
+  }
+  .action-links .delete-link {
+    color: #d93025;
+    background: rgba(217, 48, 37, 0.08);
+    border: 1px solid rgba(217, 48, 37, 0.28);
+  }
+  .action-links .delete-link:hover {
+    background: rgba(217, 48, 37, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #5A7284;
+    padding: 30px 12px;
+    font-size: 0.9rem;
+  }
+</style>
+
+<div class="child-list-wrapper">
+
+  <div class="child-list-header">
+    <h2>Your Children</h2>
+    <p>Manage the child profiles linked to your account</p>
+  </div>
+
+  <div class="child-search-row">
+    <input type="text" id="childSearch" placeholder="Search children...">
+  </div>
+<div class="child-card-grid" id="childCardGrid">
+    {% for i in data %}
+    <div class="child-card" data-search="{{ i.Name }} {{ i.gender }} {{ i.blood_group }} {{ i.relation }}">
+
+        <div class="child-card-top">
+            <div class="child-avatar">{{ i.Name|slice:":1"|upper }}</div>
+
+            <div>
+                <div class="child-name">{{ i.Name }}</div>
+                <div class="child-sl">{{ forloop.counter }}</div>
+            </div>
+        </div>
+
+        <div class="child-card-body">
+            {% if i.gender == "Male" %}
+                <span class="gender-badge gender-male">Male</span>
+            {% else %}
+                <span class="gender-badge gender-female">Female</span>
+            {% endif %}
+
+            <span class="dob-badge">
+                <strong>DOB:</strong> {{ i.Dob }}
+            </span>
+
+            <span class="blood-badge">
+                <strong>Blood Group:</strong> {{ i.blood_group }}
+            </span>
+
+            <span class="relation-badge">
+                <strong>Relation:</strong> {{ i.relation }}
+            </span>
+        </div>
+
+        <div class="child-card-footer action-links">
+            <a href="/myapp/U_edit_child_info_get/{{ i.id }}#t" class="edit-link">
+                <i class="bi bi-pencil-square"></i>
+            </a>
+
+            <a href="/myapp/delete_child_info/{{ i.id }}"
+               class="delete-link"
+               onclick="return confirm('Are you sure you want to delete this record?');">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="no-child-message">
+        <i class="bi bi-person-plus"></i>
+        <h5>No Children Added</h5>
+        <p>You haven't added any child information yet.</p>
+    </div>
+
+    {% endfor %}
+</div>
+
+<div class="no-results" id="noResultsMsg" style="display:none;">
+    No matching children found.
+</div>
+
+<script>
+  document.getElementById('childSearch').addEventListener('input', function () {
+    var query = this.value.trim().toLowerCase();
+    var cards = document.querySelectorAll('#childCardGrid .child-card');
+    var visibleCount = 0;
+
+    cards.forEach(function (card) {
+      var haystack = card.getAttribute('data-search').toLowerCase();
+      var match = haystack.indexOf(query) !== -1;
+      card.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    document.getElementById('noResultsMsg').style.display = visibleCount === 0 ? 'block' : 'none';
+  });
+</script>
+
+{% endblock %}

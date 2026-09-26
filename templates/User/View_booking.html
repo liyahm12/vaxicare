@@ -1,0 +1,144 @@
+{% extends 'User/Userindex.html' %}
+{% block body %}
+
+<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+<style>
+  .booking-wrapper {
+    padding: 20px 16px 40px;
+  }
+  .booking-header {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+  }
+  .booking-header h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+  .booking-header p {
+    margin: 6px 0 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+  }
+  .booking-table-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    padding: 24px;
+  }
+  #registrationTable thead th {
+    background: #f0f9ff;
+    color: #0369a1;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: none;
+    white-space: nowrap;
+  }
+  #registrationTable tbody td {
+    font-size: 0.88rem;
+    vertical-align: middle;
+    color: #444;
+  }
+  .vaccine-name-cell {
+    font-weight: 600;
+    color: #2d2d2d;
+  }
+  .status-badge {
+    padding: 3px 12px;
+    border-radius: 30px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  .status-pending {
+    background: #fff7e6;
+    color: #b45309;
+  }
+  .status-confirmed, .status-booked, .status-approved {
+    background: #eafaf1;
+    color: #1a9c6c;
+  }
+  .status-cancelled, .status-rejected {
+    background: #fdecea;
+    color: #d93025;
+  }
+  .status-default {
+    background: #f0f9ff;
+    color: #0284c7;
+  }
+</style>
+
+<div class="booking-wrapper">
+
+  <div class="booking-header">
+    <h2>View Booking</h2>
+    <p>All your vaccine slot bookings in one place</p>
+  </div>
+
+  <div class="booking-table-card">
+    <div class="table-responsive">
+      <table id="registrationTable" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>SL No.</th>
+            <th>Vaccine Name</th>
+            <th>Description</th>
+            <th>Dose Number</th>
+            <th>Age</th>
+              <th>Hospital Name</th>
+            <th>Slot Date</th>
+            <th>Slot Time</th>
+
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><span class="vaccine-name-cell">{{ i.SLOT.VACCINATIONINFORMATION.Vaccinename }}</span></td>
+            <td>{{ i.SLOT.VACCINATIONINFORMATION.Description }}</td>
+            <td>{{ i.SLOT.VACCINATIONINFORMATION.Dose_number }}</td>
+            <td>{{ i.SLOT.VACCINATIONINFORMATION.Age }}</td>
+              <td>{{ i.SLOT.HOSPITAL.hospitalname }}</td>
+            <td>{{ i.SLOT.Date }}</td>
+            <td>{{ i.SLOT.Fromtime }}</td>
+
+            <td>
+              <span class="status-badge status-{{ i.status|lower }}">{{ i.status }}</span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  (function initRegistrationTable(retriesLeft) {
+    if (typeof jQuery === 'undefined' || typeof jQuery.fn.DataTable === 'undefined') {
+      if (retriesLeft > 0) {
+        setTimeout(function () { initRegistrationTable(retriesLeft - 1); }, 100);
+      } else {
+        console.error('DataTables failed to load — check for a duplicate/conflicting jQuery include on this page.');
+      }
+      return;
+    }
+
+    var $ = jQuery;
+    $(function () {
+      $('#registrationTable').DataTable();
+    });
+  })(20);
+</script>
+
+{% endblock %}

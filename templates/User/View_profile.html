@@ -1,0 +1,652 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>View profile</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Profile</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <td>Name</td>#}
+{#          <td>{{ data.name }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>Gender</td>#}
+{#          <td>{{ data.gender }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>DOB</td>#}
+{#          <td>{{ data.Dob }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>Email</td>#}
+{#          <td>{{ data.email }}</td>#}
+{#        </tr>#}
+{##}
+{#          <tr>#}
+{#          <td>Phone</td>#}
+{#          <td>{{ data.phone }}</td>#}
+{#        </tr>#}
+{##}
+{#          <tr>#}
+{#          <td>Place</td>#}
+{#          <td>{{ data.place }}</td>#}
+{#        </tr>#}
+{##}
+{#          <tr>#}
+{#          <td>City</td>#}
+{#          <td>{{ data.city }}</td>#}
+{#        </tr>#}
+{##}
+{#          <tr>#}
+{#          <td>State</td>#}
+{#          <td>{{ data.state }}</td>#}
+{#        </tr>#}
+{##}
+{##}
+{#         <tr>#}
+{#          <td>Pincode</td>#}
+{#          <td>{{ data.pincode }}</td>#}
+{#        </tr>#}
+{##}
+{#         <tr>#}
+{#          <td>Photo</td>#}
+{#          <td><img src="{{ data.Upload_photo }}" height="100px" width="100px"> </td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td></td>#}
+{#            <td><a href="/myapp/U_edit_profile_get/" class="btn btn-info">Edit profile</a> </td>#}
+{#        </tr>#}
+{##}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+{#{% extends 'User/Userindex.html' %}#}
+{#{% block body %}#}
+{##}
+{#<style>#}
+{#  .profile-view-wrapper {#}
+{#    padding: 40px 16px;#}
+{#  }#}
+{#  .profile-view-card {#}
+{#    max-width: 640px;#}
+{#    margin: 0 auto;#}
+{#    background: #fff;#}
+{#    border-radius: 16px;#}
+{#    box-shadow: 0 8px 30px rgba(0,0,0,0.08);#}
+{#    overflow: hidden;#}
+{#  }#}
+{#  .profile-view-header {#}
+{#    background: linear-gradient(135deg, #4e73df, #6f42c1);#}
+{#    color: #fff;#}
+{#    padding: 32px;#}
+{#    text-align: center;#}
+{#  }#}
+{#  .profile-view-photo {#}
+{#    width: 100px;#}
+{#    height: 100px;#}
+{#    border-radius: 50%;#}
+{#    object-fit: cover;#}
+{#    border: 4px solid #fff;#}
+{#    box-shadow: 0 4px 12px rgba(0,0,0,0.15);#}
+{#    margin: 0 auto 14px;#}
+{#    display: block;#}
+{#    background: #eee;#}
+{#  }#}
+{#  .profile-view-header h2 {#}
+{#    margin: 0;#}
+{#    font-weight: 600;#}
+{#  }#}
+{#  .profile-view-header p {#}
+{#    margin: 4px 0 0;#}
+{#    font-size: 0.85rem;#}
+{#    opacity: 0.85;#}
+{#  }#}
+{#  .profile-view-body {#}
+{#    padding: 32px;#}
+{#  }#}
+{#  .profile-detail-row {#}
+{#    display: flex;#}
+{#    justify-content: space-between;#}
+{#    align-items: center;#}
+{#    padding: 12px 0;#}
+{#    border-bottom: 1px solid #f0f0f0;#}
+{#  }#}
+{#  .profile-detail-row:last-of-type {#}
+{#    border-bottom: none;#}
+{#  }#}
+{#  .profile-detail-label {#}
+{#    font-size: 0.78rem;#}
+{#    text-transform: uppercase;#}
+{#    letter-spacing: 0.05em;#}
+{#    color: #999;#}
+{#    font-weight: 600;#}
+{#  }#}
+{#  .profile-detail-value {#}
+{#    font-size: 0.95rem;#}
+{#    color: #333;#}
+{#    font-weight: 500;#}
+{#    text-align: center;#}
+{#  }#}
+{#  .btn-edit-profile {#}
+{#    background: linear-gradient(135deg, #4e73df, #6f42c1);#}
+{#    border: none;#}
+{#    padding: 10px 28px;#}
+{#    border-radius: 8px;#}
+{#    font-weight: 500;#}
+{#    display: block;#}
+{#    width: 100%;#}
+{#    margin-top: 24px;#}
+{#  }#}
+{#  .btn-edit-profile:hover {#}
+{#    opacity: 0.9;#}
+{#    color: #fff;#}
+{#  }#}
+{#</style>#}
+{##}
+{#<div class="profile-view-wrapper">#}
+{#  <div class="profile-view-card">#}
+{##}
+{#    <div class="profile-view-header">#}
+{#      <img src="{{ data.Upload_photo }}" class="profile-view-photo" alt="Profile photo">#}
+{#      <h2>{{ data.name }}</h2>#}
+{#      <p>{{ data.email }}</p>#}
+{#    </div>#}
+{##}
+{#    <div class="profile-view-body">#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">Gender</span>#}
+{#        <span class="profile-detail-value">{{ data.gender }}</span>#}
+{#      </div>#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">Date of Birth</span>#}
+{#        <span class="profile-detail-value">{{ data.Dob }}</span>#}
+{#      </div>#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">Phone</span>#}
+{#        <span class="profile-detail-value">{{ data.phone }}</span>#}
+{#      </div>#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">Place</span>#}
+{#        <span class="profile-detail-value">{{ data.place }}</span>#}
+{#      </div>#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">City</span>#}
+{#        <span class="profile-detail-value">{{ data.city }}</span>#}
+{#      </div>#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">State</span>#}
+{#        <span class="profile-detail-value">{{ data.state }}</span>#}
+{#      </div>#}
+{##}
+{#      <div class="profile-detail-row">#}
+{#        <span class="profile-detail-label">Pincode</span>#}
+{#        <span class="profile-detail-value">{{ data.pincode }}</span>#}
+{#      </div>#}
+{##}
+{#      <a href="/myapp/U_edit_profile_get/" class="btn btn-edit-profile text-white">Edit Profile</a>#}
+{##}
+{#    </div>#}
+{##}
+{#  </div>#}
+{#</div>#}
+{##}
+{#{% endblock %}#}
+
+
+{% extends 'User/Userindex.html' %}
+{% block body %}
+
+<style>
+  :root {
+    --sky: #eaf7ff;
+    --sky-light: #f6fcff;
+    --sky-blue: #38a9e8;
+    --sky-deep: #168dcc;
+    --navy: #17324d;
+    --text: #34495e;
+    --muted: #8293a3;
+    --line: #e5f0f6;
+    --white: #ffffff;
+  }
+
+  .profile-page {
+    min-height: 100vh;
+    padding: 55px 20px 80px;
+    background:
+      radial-gradient(circle at 10% 5%, rgba(56,169,232,.16), transparent 28%),
+      radial-gradient(circle at 90% 15%, rgba(20,184,166,.10), transparent 25%),
+      linear-gradient(180deg, var(--sky) 0%, var(--sky-light) 48%, #fff 100%);
+  }
+
+  .profile-container {
+    max-width: 850px;
+    margin: auto;
+  }
+
+  /* Header */
+  .profile-heading {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .profile-heading-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 15px;
+    border-radius: 50px;
+    background: rgba(56,169,232,.10);
+    border: 1px solid rgba(56,169,232,.20);
+    color: var(--sky-deep);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .profile-heading h1 {
+    margin: 14px 0 5px;
+    color: var(--navy);
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .profile-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* Main Card */
+  .profile-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 55px rgba(36, 139, 190, .12);
+  }
+
+  /* Profile Banner */
+  .profile-banner {
+    position: relative;
+    padding: 38px 30px 32px;
+    text-align: center;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,.30), transparent 25%),
+      radial-gradient(circle at 85% 20%, rgba(255,255,255,.22), transparent 25%),
+      linear-gradient(135deg, #42b7ee, #188fd0);
+    color: #fff;
+  }
+
+  .profile-banner::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .profile-photo-wrap {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .profile-photo {
+    width: 112px;
+    height: 112px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    border: 5px solid rgba(255,255,255,.95);
+    background: #eef8fd;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  }
+
+  .profile-status {
+    position: absolute;
+    right: 4px;
+    bottom: 7px;
+    width: 20px;
+    height: 20px;
+    background: #20c997;
+    border: 3px solid #fff;
+    border-radius: 50%;
+  }
+
+  .profile-banner h2 {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .profile-banner p {
+    position: relative;
+    z-index: 2;
+    margin: 6px 0 0;
+    font-size: 14px;
+    opacity: .9;
+  }
+
+  /* Body */
+  .profile-body {
+    padding: 22px 42px 40px;
+  }
+
+  .details-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .details-title-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sky);
+    color: var(--sky-deep);
+    font-size: 16px;
+  }
+
+  .profile-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .profile-detail {
+    padding: 17px 18px;
+    border: 1px solid var(--line);
+    background: #fbfdff;
+    border-radius: 14px;
+    transition: .2s ease;
+  }
+
+  .profile-detail:hover {
+    border-color: #bce4f5;
+    background: #f5fbff;
+    transform: translateY(-1px);
+  }
+
+  .profile-detail-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .profile-detail-value {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    word-break: break-word;
+  }
+
+  /* Edit Button */
+  .profile-actions {
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .btn-edit-profile {
+    width: 100%;
+    min-height: 50px;
+    border: none;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: #fff !important;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--sky-blue), var(--sky-deep));
+    box-shadow: 0 8px 20px rgba(38, 155, 211, .22);
+    font-size: 14px;
+    font-weight: 700;
+    transition: .2s ease;
+  }
+
+  .btn-edit-profile:hover {
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(38, 155, 211, .30);
+  }
+
+  /* Responsive */
+  @media (max-width: 650px) {
+    .profile-page {
+      padding: 30px 14px 60px;
+    }
+
+    .profile-heading h1 {
+      font-size: 27px;
+    }
+
+    .profile-body {
+      padding: 20px 20px 30px;
+    }
+
+    .profile-details {
+      grid-template-columns: 1fr;
+    }
+
+    .profile-banner {
+      padding: 32px 20px 28px;
+    }
+  }
+</style>
+
+<div class="profile-page">
+
+  <div class="profile-container">
+
+```
+<!-- Page Heading -->
+<div class="profile-heading">
+
+  <span class="profile-heading-badge">
+    <i class="bi bi-person-circle"></i>
+    VaxiCare · My Profile
+  </span>
+
+  <h1>Profile Overview</h1>
+
+  <p>View and manage your personal information</p>
+
+</div>
+
+
+<!-- Profile Card -->
+<div class="profile-card">
+
+  <!-- Profile Banner -->
+  <div class="profile-banner">
+
+    <div class="profile-photo-wrap">
+
+      <img
+        src="{{ data.Upload_photo }}"
+        class="profile-photo"
+        alt="Profile photo"
+      >
+
+      <span class="profile-status"></span>
+
+    </div>
+
+    <h2>{{ data.name }}</h2>
+
+    <p>
+      <i class="bi bi-envelope me-1"></i>
+      {{ data.email }}
+    </p>
+      <p>
+      <i class="bi bi-telephone me-1"></i>
+      {{ data.phone }}
+    </p>
+
+  </div>
+
+
+  <!-- Profile Details -->
+  <div class="profile-body">
+
+    <div class="details-title">
+
+      <span class="details-title-icon">
+          <span style="font-size:18px;">👤</span>
+      </span>
+
+      Personal Information
+
+    </div>
+
+
+    <div class="profile-details">
+
+      <!-- Gender -->
+      <div class="profile-detail">
+        <span class="profile-detail-label">
+          Gender
+        </span>
+
+        <span class="profile-detail-value">
+          {{ data.gender }}
+        </span>
+      </div>
+
+
+      <!-- Date of Birth -->
+      <div class="profile-detail">
+        <span class="profile-detail-label">
+          Date of Birth
+        </span>
+
+        <span class="profile-detail-value">
+          {{ data.Dob }}
+        </span>
+      </div>
+
+
+
+
+
+      <!-- Place -->
+      <div class="profile-detail">
+        <span class="profile-detail-label">
+          Place
+        </span>
+
+        <span class="profile-detail-value">
+          {{ data.place }}
+        </span>
+      </div>
+
+
+      <!-- City -->
+      <div class="profile-detail">
+        <span class="profile-detail-label">
+          City
+        </span>
+
+        <span class="profile-detail-value">
+          {{ data.city }}
+        </span>
+      </div>
+
+
+      <!-- State -->
+      <div class="profile-detail">
+        <span class="profile-detail-label">
+          State
+        </span>
+
+        <span class="profile-detail-value">
+          {{ data.state }}
+        </span>
+      </div>
+
+
+      <!-- Pincode -->
+      <div class="profile-detail">
+        <span class="profile-detail-label">
+          Pincode
+        </span>
+
+        <span class="profile-detail-value">
+          {{ data.pincode }}
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- Action -->
+    <div class="profile-actions">
+
+      <a
+        href="/myapp/U_edit_profile_get/#t"
+        class="btn-edit-profile"
+      >
+        <i class="bi bi-pencil-square"></i>
+        Edit Profile
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,524 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>Registration Data Table</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Document</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th>Slno</th>#}
+{##}
+{#          <th>Date</th>#}
+{#          <th>Document</th>#}
+{#          <th>User name</th>#}
+{#          <th>Status</th>#}
+{##}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        <!-- Sample Data Row -->#}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ i.Date }}</td>#}
+{#          <td><a href="{{ i.Document }}" class="btn btn-info">View</a> </td>#}
+{#<td>{{ i.USER.name}}<br>{{ i.USER.email}}<br>{{ i.USER.phone}}</td>#}
+{#<td>{{ i.status }}</td>#}
+{##}
+{##}
+{#        </tr>#}
+{#        {% endfor %}#}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#  <script>#}
+{#    $(document).ready(function () {#}
+{#      $('#registrationTable').DataTable();#}
+{#    });#}
+{#  </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaxiCare — View Documents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5FBFD;
+      --primary: #2C97D6;
+      --primary-deep: #1B6FA8;
+      --teal: #22C6A8;
+      --navy: #10263A;
+      --navy-soft: #5A7284;
+      --mist: #EAF6FB;
+      --border: #DBEEF6;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);
+      --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);
+      --error: #E5484D;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+        var(--bg);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 36px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(245, 251, 253, .82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 9px; }
+    .brand-mark { width: 28px; height: 28px; }
+    .brand-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16.5px;
+      letter-spacing: -.01em;
+    }
+    .brand-name span { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy-soft);
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .avatar-nav {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── Stage ── */
+    .stage {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 24px 56px;
+    }
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      margin-bottom: 18px;
+    }
+    .breadcrumb b { color: var(--navy); font-weight: 600; }
+
+    /* ── Header block ── */
+    .header-block {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .header-left .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .header-left h1 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin: 5px 0 4px;
+      color: var(--navy);
+    }
+    .header-left p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--navy-soft);
+      line-height: 1.45;
+    }
+
+    /* ── Main card ── */
+    .main-card {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .main-card-inner { padding: 20px 22px 22px; }
+
+    /* ── Table ── */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table#registrationTable {
+      width: 100% !important;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13.5px;
+    }
+    #registrationTable thead th {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .045em;
+      color: var(--navy-soft);
+      background: var(--mist);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 14px;
+      white-space: nowrap;
+      text-align: left;
+    }
+    #registrationTable tbody td {
+      padding: 14px;
+      vertical-align: middle;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--navy);
+      font-weight: 500;
+    }
+    #registrationTable tbody tr:last-child td { border-bottom: none; }
+    #registrationTable tbody tr:hover td {
+      background: rgba(234, 246, 251, 0.5);
+    }
+
+    /* Sl. No column */
+    .col-sl {
+      width: 64px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      color: var(--navy-soft);
+      font-weight: 600;
+    }
+
+    /* Date */
+    .col-date {
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* User cell */
+    .user-block { line-height: 1.4; }
+    .user-block .uname {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--navy);
+    }
+    .user-block .umeta {
+      font-size: 12px;
+      color: var(--navy-soft);
+      font-weight: 400;
+    }
+
+    /* Status badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: capitalize;
+      background: var(--mist);
+      color: var(--primary-deep);
+      border: 1px solid var(--border);
+    }
+    .badge.approved,
+    .badge.active,
+    .badge.open {
+      background: rgba(34, 198, 168, 0.12);
+      color: #0d8a72;
+      border-color: rgba(34, 198, 168, 0.3);
+    }
+    .badge.pending,
+    .badge.review {
+      background: rgba(44, 151, 214, 0.12);
+      color: var(--primary-deep);
+      border-color: rgba(44, 151, 214, 0.28);
+    }
+    .badge.rejected,
+    .badge.closed {
+      background: rgba(229, 72, 77, 0.1);
+      color: #c53030;
+      border-color: rgba(229, 72, 77, 0.22);
+    }
+
+    /* View button */
+    .btn-view {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(27, 111, 168, .2);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    }
+    .btn-view:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(27, 111, 168, .28);
+      filter: brightness(1.05);
+    }
+    .btn-view svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* ── DataTables chrome ── */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      margin: 10px 0 4px;
+    }
+    .dataTables_wrapper .dataTables_filter input {
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      padding: 6px 11px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--navy);
+      outline: none;
+      margin-left: 6px;
+      min-width: 180px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .dataTables_wrapper .dataTables_filter input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(44, 151, 214, .12);
+    }
+    .dataTables_wrapper .dataTables_length select {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12.5px;
+      color: var(--navy);
+      outline: none;
+      margin: 0 4px;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+      border-radius: 8px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--white) !important;
+      color: var(--navy) !important;
+      margin: 0 2px;
+      padding: 4px 10px !important;
+      font-weight: 500;
+      font-size: 12.5px;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep)) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.current) {
+      background: var(--mist) !important;
+      color: var(--navy) !important;
+      border-color: var(--border) !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+    .dataTables_wrapper .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 0;
+    }
+    .dataTables_wrapper .col-sm-12,
+    .dataTables_wrapper .col-md-6 {
+      padding: 0;
+      width: auto;
+      flex: 1 1 auto;
+    }
+    table.dataTable.no-footer { border-bottom: none; }
+
+    /* Empty state hint when no rows (optional visual) */
+    .dataTables_empty {
+      padding: 32px 16px !important;
+      text-align: center;
+      color: var(--navy-soft);
+      font-size: 13.5px;
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 12px 18px; }
+      .nav-links { display: none; }
+      .stage { padding: 20px 16px 40px; }
+      .header-left h1 { font-size: 19px; }
+      .main-card-inner { padding: 14px 12px 16px; }
+      #registrationTable thead th,
+      #registrationTable tbody td { padding: 11px 10px; font-size: 12.5px; }
+      .dataTables_wrapper .dataTables_filter input { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+{% extends 'Hospital/Hospitalindex.html' %}
+{% block body %}
+
+
+
+  <div class="stage">
+    <div class="breadcrumb">Documents &nbsp;/&nbsp; <b>View Document</b></div>
+
+    <div class="header-block">
+      <div class="header-left">
+        <div class="eyebrow">Records · Documents</div>
+        <h1>View documents</h1>
+        <p>Browse uploaded documents, user details, and current status.</p>
+      </div>
+    </div>
+
+    <div class="main-card">
+      <div class="main-card-inner">
+        <div class="table-scroll">
+          <table id="registrationTable" class="display" style="width:100%">
+            <thead>
+              <tr>
+                <th class="col-sl">Sl. No</th>
+                <th>Date</th>
+                <th>Document</th>
+                <th>User</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+              <tr>
+                <td class="col-sl">{{ forloop.counter }}</td>
+                <td class="col-date">{{ i.Date }}</td>
+                <td>
+                  <a href="{{ i.Document }}" class="btn-view" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    View
+                  </a>
+                </td>
+                <td>
+                  <div class="user-block">
+                    <div class="uname">{{ i.USER.name }}</div>
+                    <div class="umeta">{{ i.USER.email }}</div>
+                    <div class="umeta">{{ i.USER.phone }}</div>
+                  </div>
+                </td>
+                <td>
+                  <span class="badge {{ i.status|lower }}">{{ i.status }}</span>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="5" class="dataTables_empty">No documents found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    // Guard against $table.DataTable not being ready yet — this happens when
+{#    // the page (via {% extends %}) loads another copy of jQuery, or the#}
+    // DataTables script hasn't finished attaching to $.fn yet when this runs.
+    // Poll briefly instead of assuming it's ready immediately.
+    (function initRegistrationTable(retriesLeft) {
+      if (typeof jQuery === 'undefined' || typeof jQuery.fn.DataTable === 'undefined') {
+        if (retriesLeft > 0) {
+          setTimeout(function () { initRegistrationTable(retriesLeft - 1); }, 100);
+        } else {
+          console.error('DataTables failed to load — check for a duplicate/conflicting jQuery include on this page.');
+        }
+        return;
+      }
+
+      var $ = jQuery;
+      $(function () {
+        // Only init DataTable if there is real data (avoid double empty row issues)
+        var $table = $('#registrationTable');
+        if ($table.find('tbody tr td[colspan]').length === 0) {
+          $table.DataTable({
+            language: {
+              search: "Search",
+              lengthMenu: "_MENU_ per page",
+              info: "Showing _START_–_END_ of _TOTAL_",
+              infoEmpty: "No documents",
+              zeroRecords: "No matching documents",
+              paginate: {
+                previous: "Prev",
+                next: "Next"
+              }
+            },
+            pageLength: 10,
+            order: [[0, 'asc']],
+            columnDefs: [
+              { orderable: false, targets: 2 }  // Document (View) column
+            ]
+          });
+        }
+      });
+    })(20);
+  </script>
+
+{% endblock %}
+</body>
+</html>

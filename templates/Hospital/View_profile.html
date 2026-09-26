@@ -1,0 +1,497 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>View profile</title>#}
+{#  <!-- Bootstrap CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hospital/Hospitalindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h2 class="mb-4">View Profile</h2>#}
+{#    <table id="registrationTable" class="table table-striped table-bordered">#}
+{##}
+{#        <tr>#}
+{#          <td>Hospitalname</td>#}
+{#          <td>{{ data.hospitalname }}</td>#}
+{#        </tr>#}
+{##}
+{##}
+{#        <tr>#}
+{#          <td>Hospitalplace</td>#}
+{#          <td>{{ data.hospitalplace }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>City</td>#}
+{#          <td>{{ data.city}}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>Hospital state</td>#}
+{#          <td>{{ data.hospitalstate }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>Hospital pincode</td>#}
+{#          <td>{{ data.hospitalpincode }} </td>#}
+{#        </tr>#}
+{##}
+{##}
+{#        <tr>#}
+{#          <td>email</td>#}
+{#          <td>{{ data.email }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>Phone</td>#}
+{#          <td>{{ data.phone }}</td>#}
+{#        </tr>#}
+{##}
+{#        <tr>#}
+{#          <td>Upload_photo</td>#}
+{#          <td><img src="{{ data.Upload_photo }}" width="100px" height="100px"></td>#}
+{#        </tr>#}
+{##}
+{#          <tr>#}
+{#          <td>licensenumber</td>#}
+{#          <td>{{ data.licensenumber }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td></td>#}
+{#            <td><a href="/myapp/H_edit_profile_get/" class="btn btn-info">Edit profile</a> </td>#}
+{#        </tr>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#        <!-- Add more rows dynamically from backend -->#}
+{##}
+{#    </table>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaxiCare — View Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F5FBFD;
+      --primary: #2C97D6;
+      --primary-deep: #1B6FA8;
+      --teal: #22C6A8;
+      --navy: #10263A;
+      --navy-soft: #5A7284;
+      --mist: #EAF6FB;
+      --border: #DBEEF6;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(16, 38, 58, .06);
+      --shadow-md: 0 10px 26px rgba(28, 111, 168, .14);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(900px 420px at 85% -10%, #E4F5FB 0%, transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, #E9FBF6 0%, transparent 55%),
+        var(--bg);
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 251, 253, .75);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 9px; }
+    .brand-mark { width: 28px; height: 28px; display: block; }
+    .brand-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16.5px;
+      letter-spacing: -.01em;
+    }
+    .brand-name span { color: var(--primary); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy-soft);
+    }
+    .avatar-nav {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 11.5px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stage {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      margin-bottom: 14px;
+    }
+    .breadcrumb b { color: var(--navy); font-weight: 600; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--white);
+    }
+
+    /* Left preview */
+    .preview-panel {
+      position: relative;
+      padding: 30px 26px;
+      color: #fff;
+      background: linear-gradient(160deg, #2C97D6 0%, #1B6FA8 55%, #17A88F 130%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .preview-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px 200px at 15% 10%, rgba(255, 255, 255, .14), transparent 60%);
+    }
+    .pv-eyebrow {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .28);
+      padding: 5px 11px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .pv-eyebrow .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #8CF4D9;
+    }
+    .pv-title {
+      position: relative;
+      z-index: 2;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.35;
+      margin: 14px 0 20px;
+    }
+
+    .profile-photo-wrap {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+    .profile-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .profile-photo-fallback {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.2);
+      display: grid;
+      place-items: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #fff;
+    }
+    .profile-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      margin: 0;
+    }
+    .profile-meta {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+    }
+
+    .ticket {
+      position: relative;
+      z-index: 2;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      padding: 14px 16px;
+    }
+    .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12.5px;
+      padding: 5px 0;
+    }
+    .ticket-row .k { color: rgba(255, 255, 255, 0.7); }
+    .ticket-row .v { font-weight: 600; text-align: right; }
+
+    .pv-note {
+      position: relative;
+      z-index: 2;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Right details panel */
+    .form-panel {
+      padding: 30px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .form-title {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      margin: 7px 0 5px;
+    }
+    .form-desc {
+      font-size: 12.5px;
+      color: var(--navy-soft);
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .detail-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .detail-row:last-of-type { border-bottom: none; }
+    .detail-row .label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--navy-soft);
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .detail-row .value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      word-break: break-word;
+    }
+
+    .btn-edit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 22px;
+      padding: 12px 16px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      border: none;
+      border-radius: 11px;
+      box-shadow: 0 8px 18px rgba(27, 111, 168, .26);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .btn-edit:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 12px 24px rgba(27, 111, 168, .32);
+      filter: brightness(1.04);
+    }
+    .btn-edit svg { width: 15px; height: 15px; }
+
+    @media (max-width: 760px) {
+      .split { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav { padding: 14px 20px; }
+      .form-panel { padding: 24px 20px; }
+      .detail-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+{% extends 'Hospital/Hospitalindex.html' %}
+{% block body %}
+
+  {# Remove this nav if Hospitalindex.html already has one #}
+
+  <div class="stage">
+    <div class="breadcrumb">Account &nbsp;/&nbsp; <b>View profile</b></div>
+
+    <div class="split">
+      <!-- Left: photo + summary -->
+      <div class="preview-panel">
+        <div>
+          <span class="pv-eyebrow"><span class="dot"></span> Hospital profile</span>
+          <div class="pv-title">Your registered hospital details on VaxiCare.</div>
+
+          <div class="profile-photo-wrap">
+            {% if data.Upload_photo %}
+            <img class="profile-photo" src="{{ data.Upload_photo }}" alt="{{ data.hospitalname }}">
+            {% else %}
+            <div class="profile-photo-fallback">H</div>
+            {% endif %}
+            <p class="profile-name">{{ data.hospitalname }}</p>
+            <p class="profile-meta">{{ data.city }}, {{ data.hospitalstate }}</p>
+          </div>
+
+          <div class="ticket">
+            <div class="ticket-row">
+              <span class="k">License</span>
+              <span class="v">{{ data.licensenumber }}</span>
+            </div>
+            <div class="ticket-row">
+              <span class="k">Phone</span>
+              <span class="v">{{ data.phone }}</span>
+            </div>
+            <div class="ticket-row">
+              <span class="k">Email</span>
+              <span class="v">{{ data.email }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="pv-note">Keep your profile up to date for verification</div>
+      </div>
+
+      <!-- Right: full details -->
+      <div class="form-panel">
+        <span class="form-eyebrow">Hospital · Profile</span>
+        <h2 class="form-title">View profile</h2>
+        <p class="form-desc">Registered name, address, contact, and license information.</p>
+
+        <div class="detail-list">
+          <div class="detail-row">
+            <span class="label">Hospital name</span>
+            <span class="value">{{ data.hospitalname }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Place</span>
+            <span class="value">{{ data.hospitalplace }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">City</span>
+            <span class="value">{{ data.city }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">State</span>
+            <span class="value">{{ data.hospitalstate }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Pincode</span>
+            <span class="value">{{ data.hospitalpincode }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Email</span>
+            <span class="value">{{ data.email }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Phone</span>
+            <span class="value">{{ data.phone }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">License no.</span>
+            <span class="value">{{ data.licensenumber }}</span>
+          </div>
+        </div>
+
+        <a href="/myapp/H_edit_profile_get/#t" class="btn-edit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+          </svg>
+          Edit profile
+        </a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+</body>
+</html>
